@@ -6,32 +6,36 @@
   <title>Final Message for Amara</title>
   <link rel="stylesheet" href="style.css" />
 </head>
-<body class="message-page">
-  <audio id="birthdayMusic" autoplay loop>
+<body>
+  <audio id="birthdayMusic" loop preload="auto">
     <source src="birthday-music.mp3" type="audio/mpeg" />
   </audio>
 
-  <div class="page-shell" id="pageShell">
-    <div class="floating-balloons">
-      <span class="balloon balloon-1"></span>
-      <span class="balloon balloon-2"></span>
-      <span class="balloon balloon-3"></span>
-      <span class="balloon balloon-4"></span>
-      <span class="balloon balloon-5"></span>
-      <span class="balloon balloon-6"></span>
-    </div>
-
+  <div class="page-shell">
+    <div class="bg-gradient"></div>
     <div class="snow-wrap" id="snowWrap"></div>
 
-    <main class="screen">
-      <section class="hero-block final-message-block">
-        <p class="top-kicker">Final Message</p>
+    <div class="balloons left-balloons">
+      <span class="balloon b1"></span>
+      <span class="balloon b2"></span>
+      <span class="balloon b3"></span>
+    </div>
 
-        <h1 class="main-title memories-title">
+    <div class="balloons right-balloons">
+      <span class="balloon b4"></span>
+      <span class="balloon b5"></span>
+      <span class="balloon b6"></span>
+    </div>
+
+    <main class="screen">
+      <section class="hero final-hero">
+        <p class="kicker">Final Message</p>
+
+        <h1 class="title smaller">
           For <span>Amara Shaha</span> 💐
         </h1>
 
-        <div class="message-text-block">
+        <div class="message-text">
           <p><strong>Dear Amara,</strong></p>
 
           <p>Assalamualaikum.</p>
@@ -56,32 +60,55 @@
 
   <script>
     const music = document.getElementById("birthdayMusic");
+    const musicBtn = document.getElementById("musicBtn");
     music.volume = 0.5;
 
-    const snowWrap = document.getElementById("snowWrap");
-    for (let i = 0; i < 34; i++) {
-      const snow = document.createElement("span");
-      snow.className = "snowflake";
-      snow.style.left = Math.random() * 100 + "%";
-      snow.style.animationDuration = (7 + Math.random() * 10) + "s";
-      snow.style.animationDelay = (Math.random() * 8) + "s";
-      snow.style.opacity = 0.25 + Math.random() * 0.55;
-      snow.style.transform = `scale(${0.6 + Math.random() * 1.2})`;
-      snowWrap.appendChild(snow);
-    }
+    let playing = false;
 
-    const musicBtn = document.getElementById("musicBtn");
-    let isPlaying = true;
+    async function tryStartMusic() {
+      try {
+        await music.play();
+        playing = true;
+        musicBtn.textContent = "Pause Music";
+      } catch (e) {
+        playing = false;
+        musicBtn.textContent = "Play Music";
+        const startOnFirstTouch = async () => {
+          try {
+            await music.play();
+            playing = true;
+            musicBtn.textContent = "Pause Music";
+          } catch (_) {}
+          document.removeEventListener("click", startOnFirstTouch);
+          document.removeEventListener("touchstart", startOnFirstTouch);
+        };
+        document.addEventListener("click", startOnFirstTouch, { once: true });
+        document.addEventListener("touchstart", startOnFirstTouch, { once: true });
+      }
+    }
+    tryStartMusic();
+
+    const snowWrap = document.getElementById("snowWrap");
+    for (let i = 0; i < 30; i++) {
+      const flake = document.createElement("span");
+      flake.className = "snowflake";
+      flake.style.left = Math.random() * 100 + "%";
+      flake.style.animationDuration = (7 + Math.random() * 8) + "s";
+      flake.style.animationDelay = (Math.random() * 6) + "s";
+      flake.style.opacity = 0.25 + Math.random() * 0.5;
+      flake.style.transform = `scale(${0.6 + Math.random()})`;
+      snowWrap.appendChild(flake);
+    }
 
     musicBtn.addEventListener("click", async () => {
       try {
-        if (isPlaying) {
+        if (playing) {
           music.pause();
-          isPlaying = false;
+          playing = false;
           musicBtn.textContent = "Play Music";
         } else {
           await music.play();
-          isPlaying = true;
+          playing = true;
           musicBtn.textContent = "Pause Music";
         }
       } catch (e) {
