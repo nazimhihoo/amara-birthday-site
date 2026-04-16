@@ -6,39 +6,43 @@
   <title>Amara Memories</title>
   <link rel="stylesheet" href="style.css" />
 </head>
-<body class="gallery-page">
-  <audio id="birthdayMusic" autoplay loop>
+<body>
+  <audio id="birthdayMusic" loop preload="auto">
     <source src="birthday-music.mp3" type="audio/mpeg" />
   </audio>
 
   <div class="page-shell" id="pageShell">
-    <div class="floating-balloons">
-      <span class="balloon balloon-1"></span>
-      <span class="balloon balloon-2"></span>
-      <span class="balloon balloon-3"></span>
-      <span class="balloon balloon-4"></span>
-      <span class="balloon balloon-5"></span>
-      <span class="balloon balloon-6"></span>
-    </div>
-
+    <div class="bg-gradient"></div>
     <div class="snow-wrap" id="snowWrap"></div>
 
-    <main class="screen">
-      <section class="hero-block">
-        <p class="top-kicker">Memories</p>
+    <div class="balloons left-balloons">
+      <span class="balloon b1"></span>
+      <span class="balloon b2"></span>
+      <span class="balloon b3"></span>
+    </div>
 
-        <h1 class="main-title memories-title">
+    <div class="balloons right-balloons">
+      <span class="balloon b4"></span>
+      <span class="balloon b5"></span>
+      <span class="balloon b6"></span>
+    </div>
+
+    <main class="screen">
+      <section class="hero">
+        <p class="kicker">Memories</p>
+
+        <h1 class="title smaller">
           <span>Amara</span> Moments 📸
         </h1>
 
-        <p class="main-subtitle">
-          One picture at a time. Smooth transition. Soft vibe. Proper special feeling.
+        <p class="subtitle">
+          One picture at a time, with soft transitions and better vibes.
         </p>
 
         <div class="memory-stage">
-          <img src="amara1.jpg" alt="Amara Memory 1" class="memory-image active" />
-          <img src="amara2.jpg" alt="Amara Memory 2" class="memory-image" />
-          <img src="amara3.jpg" alt="Amara Memory 3" class="memory-image" />
+          <img src="amara1.jpg" alt="Memory 1" class="memory-image active" />
+          <img src="amara2.jpg" alt="Memory 2" class="memory-image" />
+          <img src="amara3.jpg" alt="Memory 3" class="memory-image" />
         </div>
 
         <p class="memory-caption" id="memoryCaption">Birthday special memory</p>
@@ -49,18 +53,16 @@
           <span class="dot"></span>
         </div>
 
-        <div class="question-line">
-          Ab batao... kya tum final message ke liye ready ho?
-        </div>
+        <p class="question">
+          Kya tum final message ke liye ready ho?
+        </p>
 
         <div class="answer-line" id="answerArea2">
           <span class="answer yes-answer" id="yesBtn2">Yes</span>
           <span class="answer no-answer" id="noBtn2">No</span>
         </div>
 
-        <p class="response-line" id="responseLine2">
-          Message skip karna sahi idea nahi lag raha 😌
-        </p>
+        <p class="feedback" id="feedback2">Message skip karna sahi idea nahi lag raha 😌</p>
       </section>
     </main>
   </div>
@@ -69,19 +71,34 @@
     const music = document.getElementById("birthdayMusic");
     music.volume = 0.5;
 
-    const shell = document.getElementById("pageShell");
-    const snowWrap = document.getElementById("snowWrap");
-
-    for (let i = 0; i < 34; i++) {
-      const snow = document.createElement("span");
-      snow.className = "snowflake";
-      snow.style.left = Math.random() * 100 + "%";
-      snow.style.animationDuration = (7 + Math.random() * 10) + "s";
-      snow.style.animationDelay = (Math.random() * 8) + "s";
-      snow.style.opacity = 0.25 + Math.random() * 0.55;
-      snow.style.transform = `scale(${0.6 + Math.random() * 1.2})`;
-      snowWrap.appendChild(snow);
+    async function tryStartMusic() {
+      try {
+        await music.play();
+      } catch (e) {
+        const startOnFirstTouch = async () => {
+          try { await music.play(); } catch (_) {}
+          document.removeEventListener("click", startOnFirstTouch);
+          document.removeEventListener("touchstart", startOnFirstTouch);
+        };
+        document.addEventListener("click", startOnFirstTouch, { once: true });
+        document.addEventListener("touchstart", startOnFirstTouch, { once: true });
+      }
     }
+    tryStartMusic();
+
+    const snowWrap = document.getElementById("snowWrap");
+    for (let i = 0; i < 30; i++) {
+      const flake = document.createElement("span");
+      flake.className = "snowflake";
+      flake.style.left = Math.random() * 100 + "%";
+      flake.style.animationDuration = (7 + Math.random() * 8) + "s";
+      flake.style.animationDelay = (Math.random() * 6) + "s";
+      flake.style.opacity = 0.25 + Math.random() * 0.5;
+      flake.style.transform = `scale(${0.6 + Math.random()})`;
+      snowWrap.appendChild(flake);
+    }
+
+    const shell = document.getElementById("pageShell");
 
     function goToPage(url) {
       shell.classList.add("page-out");
@@ -92,7 +109,7 @@
 
     const slides = document.querySelectorAll(".memory-image");
     const dots = document.querySelectorAll(".dot");
-    const caption = document.getElementById("memoryCaption");
+    const memoryCaption = document.getElementById("memoryCaption");
 
     const captions = [
       "Birthday special memory",
@@ -111,7 +128,7 @@
         dot.classList.toggle("active", i === index);
       });
 
-      caption.textContent = captions[index];
+      memoryCaption.textContent = captions[index];
       currentSlide = index;
     }
 
@@ -123,53 +140,4 @@
 
     setInterval(nextSlide, 2800);
 
-    const answerArea2 = document.getElementById("answerArea2");
-    const yesBtn2 = document.getElementById("yesBtn2");
-    const noBtn2 = document.getElementById("noBtn2");
-    const responseLine2 = document.getElementById("responseLine2");
-
-    let noCount2 = 0;
-    const noTexts2 = [
-      "No",
-      "Again no?",
-      "Still no?",
-      "Why no?",
-      "Pakka no?",
-      "Last no?"
-    ];
-
-    yesBtn2.addEventListener("click", () => {
-      responseLine2.textContent = "The final message is opening 💐";
-      goToPage("message.html");
-    });
-
-    noBtn2.addEventListener("click", () => {
-      noCount2++;
-
-      const index = Math.min(noCount2, noTexts2.length - 1);
-      noBtn2.textContent = noTexts2[index];
-
-      const areaWidth = answerArea2.clientWidth;
-      const areaHeight = answerArea2.clientHeight;
-      const btnWidth = Math.max(62, 92 - noCount2 * 6);
-      const btnHeight = Math.max(26, 36 - noCount2 * 2);
-
-      noBtn2.style.width = btnWidth + "px";
-      noBtn2.style.height = btnHeight + "px";
-      noBtn2.style.fontSize = Math.max(0.72, 0.98 - noCount2 * 0.05) + "rem";
-
-      const maxX = Math.max(8, areaWidth - btnWidth - 8);
-      const maxY = Math.max(8, areaHeight - btnHeight - 8);
-
-      const x = Math.floor(Math.random() * maxX);
-      const y = Math.floor(Math.random() * maxY);
-
-      noBtn2.style.left = x + "px";
-      noBtn2.style.top = y + "px";
-      noBtn2.style.transform = "none";
-
-      responseLine2.textContent = "No button bhi shayad message se bach nahi pa raha 😏";
-    });
-  </script>
-</body>
-</html>
+    const yesBtn2 = document
