@@ -7,48 +7,59 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="container page-center">
-    <div class="card">
-      <div class="top-nav">
-        <a href="index.html" class="btn btn-primary">Home</a>
-        <a href="gallery.html" class="btn">Gallery</a>
-        <a href="message.html" class="btn">Message</a>
+  <div class="page-shell">
+    <div class="container page-center">
+      <div class="card">
+        <nav class="top-nav">
+          <a href="index.html" class="nav-link active" data-page>Home</a>
+          <a href="gallery.html" class="nav-link" data-page>Memories</a>
+          <a href="message.html" class="nav-link" data-page>Message</a>
+        </nav>
+
+        <div class="hero-wrap">
+          <div class="badge">Birthday Special • 16 April</div>
+
+          <h1 class="title">
+            Happy Birthday <span class="name">Amara Shaha</span> 🎉
+          </h1>
+
+          <p class="subtitle">
+            A small but special birthday website made with respect, warmth, and beautiful wishes for someone truly valued.
+          </p>
+
+          <p class="date-note">
+            A belated wish, but still from the heart. 💖
+          </p>
+
+          <div class="type-wrap">
+            <span id="typedText"></span><span class="cursor">|</span>
+          </div>
+
+          <div class="hero-image-frame">
+            <img src="birthday-banner.png" alt="Birthday Banner" class="hero-image" />
+          </div>
+
+          <div class="btns">
+            <a href="gallery.html" class="btn btn-primary" data-page>Open Memories</a>
+            <a href="message.html" class="btn" data-page>Read Message</a>
+          </div>
+
+          <div class="footer">
+            Page 1 of 3 • Smooth birthday experience
+          </div>
+        </div>
       </div>
-
-      <div class="badge">Birthday Special • Amara Shaha</div>
-
-      <h1>Happy Belated Birthday <span class="name">Amara Shaha</span> 🎉</h1>
-
-      <p class="subtitle">
-        To an amazing sister, a wonderful teammate, and a deeply respected ma’am —
-        this little website is made specially for you with love, respect, and warm wishes.
-      </p>
-
-      <p class="date-note">Birthday: 16 April 💖</p>
-
-      <div class="type-wrap">
-        <span id="typedText"></span><span class="cursor">|</span>
-      </div>
-
-      <img src="birthday-banner.png" alt="Birthday Banner" class="hero-image">
-
-      <div class="btns">
-        <a href="gallery.html" class="btn btn-primary">Open Gallery</a>
-        <a href="message.html" class="btn">Read Message</a>
-      </div>
-
-      <div class="footer">Page 1 of 3 • Made with ❤️ for Amara Shaha</div>
     </div>
   </div>
 
   <script>
     const lines = [
-      'Wishing you joy, success, and beautiful moments ✨',
-      'A special wish for a special sister 💖',
-      'Stay blessed, smiling, and shining always 🌸'
+      "A special wish for a special person ✨",
+      "May your days be filled with peace and happiness 💖",
+      "Stay blessed, smiling, and shining always 🌸"
     ];
 
-    const typedText = document.getElementById('typedText');
+    const typedText = document.getElementById("typedText");
     let lineIndex = 0;
     let charIndex = 0;
     let deleting = false;
@@ -59,6 +70,7 @@
       if (!deleting) {
         typedText.textContent = current.slice(0, charIndex + 1);
         charIndex++;
+
         if (charIndex === current.length) {
           deleting = true;
           setTimeout(typeEffect, 1200);
@@ -67,6 +79,7 @@
       } else {
         typedText.textContent = current.slice(0, charIndex - 1);
         charIndex--;
+
         if (charIndex === 0) {
           deleting = false;
           lineIndex = (lineIndex + 1) % lines.length;
@@ -77,6 +90,17 @@
     }
 
     typeEffect();
+
+    document.querySelectorAll("a[data-page]").forEach(link => {
+      link.addEventListener("click", function(e) {
+        e.preventDefault();
+        const target = this.getAttribute("href");
+        document.querySelector(".page-shell").classList.add("page-out");
+        setTimeout(() => {
+          window.location.href = target;
+        }, 380);
+      });
+    });
   </script>
 </body>
 </html>
