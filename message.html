@@ -3,88 +3,70 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Message for Amara Shaha</title>
+  <title>Final Message for Amara</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-
   <div class="page-shell">
-    <div class="container page-center">
-      <div class="card">
+    <main class="screen message-screen">
+      <div class="bg-balloons balloons-left"></div>
+      <div class="bg-balloons balloons-right"></div>
+      <div class="sparkles"></div>
 
-        <nav class="top-nav">
-          <a href="index.html" class="nav-link" data-page>Home</a>
-          <a href="gallery.html" class="nav-link" data-page>Memories</a>
-          <a href="message.html" class="nav-link active" data-page>Message</a>
-        </nav>
+      <section class="main-card message-card">
+        <div class="badge">Final Message</div>
 
-        <div class="section-wrap">
+        <h1 class="main-title smaller-title">
+          For <span>Amara Shaha</span> 💐
+        </h1>
 
-          <div class="badge">Final Message</div>
+        <div class="message-box">
+          <p><strong>Dear Amara,</strong></p>
 
-          <h1 class="title">
-            For <span class="name">Amara Shaha</span> 💐
-          </h1>
+          <p>Assalamualaikum.</p>
 
-          <div class="note-box" style="text-align:left;">
+          <p>
+            Belated happy birthday. Allah Ta’ala aap ki zindagi mein hamesha khushi, sukoon, sehat aur barkat ata farmae.
+          </p>
 
-            <p><strong>Dear Amara,</strong></p>
+          <p>
+            Dua hai ke aap jahan bhi rahen, Allah aap ko apni rehmat, hifazat aur asaniyon mein rakhe. Aap ke liye har naya saal behtar ho, aur har agla din khair lekar aaye.
+          </p>
 
-            <p>Assalamualaikum.</p>
-
-            <p>
-              Belated happy birthday. Allah Ta’ala aap ki zindagi mein hamesha
-              khushi, sukoon, sehat aur barkat ata farmae.
-            </p>
-
-            <p>
-              Dua hai ke aap jahan bhi rahen, Allah aap ko apni rehmat,
-              hifazat aur asaniyon mein rakhe. Aap ke liye har naya saal
-              behtar ho, aur har agla din khair lekar aaye.
-            </p>
-
-            <p class="signature">— From NX 💖</p>
-
-          </div>
-
-          <div class="btns">
-            <button class="btn btn-primary" onclick="playMusic()">Play Music</button>
-            <a href="index.html" class="btn" data-page>Back Home</a>
-          </div>
-
-          <audio id="music" loop>
-            <source src="birthday-music.mp3" type="audio/mpeg">
-          </audio>
-
-          <div class="footer">
-            Page 3 of 3 • Respectful & clean ending
-          </div>
-
+          <p class="from-line">— From NX</p>
         </div>
 
-      </div>
-    </div>
+        <div class="final-actions">
+          <button class="music-btn" id="musicBtn">Play Music</button>
+        </div>
+
+        <audio id="birthdayMusic" loop>
+          <source src="birthday-music.mp3" type="audio/mpeg" />
+        </audio>
+      </section>
+    </main>
   </div>
 
   <script>
-    // page transition
-    document.querySelectorAll("a[data-page]").forEach(link => {
-      link.addEventListener("click", function(e) {
-        e.preventDefault();
-        const target = this.getAttribute("href");
-        document.querySelector(".page-shell").classList.add("page-out");
-        setTimeout(() => {
-          window.location.href = target;
-        }, 380);
-      });
+    const musicBtn = document.getElementById("musicBtn");
+    const birthdayMusic = document.getElementById("birthdayMusic");
+    let isPlaying = false;
+
+    musicBtn.addEventListener("click", async () => {
+      try {
+        if (!isPlaying) {
+          await birthdayMusic.play();
+          isPlaying = true;
+          musicBtn.textContent = "Pause Music";
+        } else {
+          birthdayMusic.pause();
+          isPlaying = false;
+          musicBtn.textContent = "Play Music";
+        }
+      } catch (error) {
+        alert("birthday-music.mp3 file check karo.");
+      }
     });
-
-    // music control
-    function playMusic() {
-      const music = document.getElementById("music");
-      music.play();
-    }
   </script>
-
 </body>
 </html>
