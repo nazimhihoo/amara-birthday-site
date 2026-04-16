@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Birthday Message for Amara Shaha</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container page-center">
+    <div class="card">
+      <div class="top-nav">
+        <a href="index.html" class="btn">Home</a>
+        <a href="gallery.html" class="btn">Gallery</a>
+        <a href="message.html" class="btn btn-primary">Message</a>
+      </div>
+
+      <div class="badge">Final Birthday Message</div>
+      <h1>For <span class="name">Amara Shaha</span> 💐</h1>
+
+      <div class="message-box">
+        <p><strong>Dear Amara,</strong></p>
+
+        <p>
+          Happy Belated Birthday! Even though this wish comes a little late,
+          the love, respect, and sincerity behind it are truly real.
+        </p>
+
+        <p>
+          You are not only my sister, but also a wonderful teammate and a deeply respected person.
+          Your personality, your support, and your presence make every moment more special.
+        </p>
+
+        <p>
+          May this new year of your life bring you happiness, peace, success, and countless beautiful moments.
+          Keep smiling, keep shining, and keep being the amazing person you are.
+        </p>
+
+        <p>
+          Wishing you a life full of blessings, joy, and unforgettable memories. 🎉✨
+        </p>
+
+        <div class="signature">— From NX 💖</div>
+      </div>
+
+      <div class="btns">
+        <button class="btn" id="musicBtn" type="button">Play Music</button>
+        <a href="index.html" class="btn">Back Home</a>
+      </div>
+
+      <audio id="bgMusic" loop>
+        <source src="birthday-music.mp3" type="audio/mpeg">
+      </audio>
+
+      <div class="footer">Page 3 of 3 • Made with ❤️ for Amara Shaha</div>
+    </div>
+  </div>
+
+  <script>
+    const music = document.getElementById('bgMusic');
+    const musicBtn = document.getElementById('musicBtn');
+    let isPlaying = false;
+
+    musicBtn.addEventListener('click', async () => {
+      try {
+        if (!isPlaying) {
+          await music.play();
+          isPlaying = true;
+          musicBtn.textContent = 'Pause Music';
+        } else {
+          music.pause();
+          isPlaying = false;
+          musicBtn.textContent = 'Play Music';
+        }
+      } catch (e) {
+        alert('birthday-music.mp3 file add karo.');
+      }
+    });
+  </script>
+</body>
+</html>
