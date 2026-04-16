@@ -6,57 +6,59 @@
   <title>Happy Birthday Amara</title>
   <link rel="stylesheet" href="style.css" />
 </head>
-<body class="home-page">
-  <audio id="birthdayMusic" autoplay loop>
+<body>
+  <audio id="birthdayMusic" loop preload="auto">
     <source src="birthday-music.mp3" type="audio/mpeg" />
   </audio>
 
   <div class="page-shell" id="pageShell">
-    <div class="floating-balloons">
-      <span class="balloon balloon-1"></span>
-      <span class="balloon balloon-2"></span>
-      <span class="balloon balloon-3"></span>
-      <span class="balloon balloon-4"></span>
-      <span class="balloon balloon-5"></span>
-      <span class="balloon balloon-6"></span>
-    </div>
-
+    <div class="bg-gradient"></div>
     <div class="snow-wrap" id="snowWrap"></div>
 
-    <main class="screen">
-      <section class="hero-block">
-        <p class="top-kicker">Birthday Special</p>
+    <div class="balloons left-balloons">
+      <span class="balloon b1"></span>
+      <span class="balloon b2"></span>
+      <span class="balloon b3"></span>
+    </div>
 
-        <h1 class="main-title">
+    <div class="balloons right-balloons">
+      <span class="balloon b4"></span>
+      <span class="balloon b5"></span>
+      <span class="balloon b6"></span>
+    </div>
+
+    <main class="screen">
+      <section class="hero">
+        <p class="kicker">Birthday Special</p>
+
+        <h1 class="title">
           Happy Birthday
           <span>Amara Shaha</span>
           🎉
         </h1>
 
-        <p class="main-subtitle">
-          A small surprise, soft vibes, and a special little experience made just for you.
+        <p class="subtitle">
+          A soft little surprise, made specially for you.
         </p>
 
         <p class="typing-line">
           <span id="typedText"></span><span class="cursor">|</span>
         </p>
 
-        <div class="hero-image-stage">
+        <div class="hero-image-wrap">
           <img src="birthday-banner.png" alt="Birthday Banner" class="hero-image" />
         </div>
 
-        <div class="question-line">
+        <p class="question">
           Kya tumne apne bhai se aisa surprise expect kiya tha?
-        </div>
+        </p>
 
         <div class="answer-line" id="answerArea1">
           <span class="answer yes-answer" id="yesBtn1">Yes</span>
           <span class="answer no-answer" id="noBtn1">No</span>
         </div>
 
-        <p class="response-line" id="responseLine1">
-          Sach sach jawab dena 😌
-        </p>
+        <p class="feedback" id="feedback1">Sach sach jawab dena 😌</p>
       </section>
     </main>
   </div>
@@ -65,24 +67,37 @@
     const music = document.getElementById("birthdayMusic");
     music.volume = 0.5;
 
-    const shell = document.getElementById("pageShell");
-    const snowWrap = document.getElementById("snowWrap");
+    async function tryStartMusic() {
+      try {
+        await music.play();
+      } catch (e) {
+        const startOnFirstTouch = async () => {
+          try { await music.play(); } catch (_) {}
+          document.removeEventListener("click", startOnFirstTouch);
+          document.removeEventListener("touchstart", startOnFirstTouch);
+        };
+        document.addEventListener("click", startOnFirstTouch, { once: true });
+        document.addEventListener("touchstart", startOnFirstTouch, { once: true });
+      }
+    }
+    tryStartMusic();
 
-    for (let i = 0; i < 34; i++) {
-      const snow = document.createElement("span");
-      snow.className = "snowflake";
-      snow.style.left = Math.random() * 100 + "%";
-      snow.style.animationDuration = (7 + Math.random() * 10) + "s";
-      snow.style.animationDelay = (Math.random() * 8) + "s";
-      snow.style.opacity = 0.25 + Math.random() * 0.55;
-      snow.style.transform = `scale(${0.6 + Math.random() * 1.2})`;
-      snowWrap.appendChild(snow);
+    const snowWrap = document.getElementById("snowWrap");
+    for (let i = 0; i < 30; i++) {
+      const flake = document.createElement("span");
+      flake.className = "snowflake";
+      flake.style.left = Math.random() * 100 + "%";
+      flake.style.animationDuration = (7 + Math.random() * 8) + "s";
+      flake.style.animationDelay = (Math.random() * 6) + "s";
+      flake.style.opacity = 0.25 + Math.random() * 0.5;
+      flake.style.transform = `scale(${0.6 + Math.random()})`;
+      snowWrap.appendChild(flake);
     }
 
     const lines = [
       "A special birthday surprise ✨",
-      "Soft vibes, warm wishes, pretty moments 💖",
-      "Made to feel a little magical 🌸"
+      "Soft vibes, pretty moments 💖",
+      "Made with warm wishes 🌸"
     ];
 
     const typedText = document.getElementById("typedText");
@@ -96,16 +111,14 @@
       if (!deleting) {
         typedText.textContent = current.slice(0, charIndex + 1);
         charIndex++;
-
         if (charIndex === current.length) {
           deleting = true;
-          setTimeout(typeEffect, 1100);
+          setTimeout(typeEffect, 1000);
           return;
         }
       } else {
         typedText.textContent = current.slice(0, charIndex - 1);
         charIndex--;
-
         if (charIndex === 0) {
           deleting = false;
           lineIndex = (lineIndex + 1) % lines.length;
@@ -114,8 +127,16 @@
 
       setTimeout(typeEffect, deleting ? 38 : 68);
     }
-
     typeEffect();
+
+    const shell = document.getElementById("pageShell");
+    const yesBtn1 = document.getElementById("yesBtn1");
+    const noBtn1 = document.getElementById("noBtn1");
+    const answerArea1 = document.getElementById("answerArea1");
+    const feedback1 = document.getElementById("feedback1");
+
+    let noCount1 = 0;
+    const noTexts1 = ["No", "Really?", "Still no?", "Pakka?", "Sure?", "No again?"];
 
     function goToPage(url) {
       shell.classList.add("page-out");
@@ -124,52 +145,36 @@
       }, 380);
     }
 
-    const answerArea1 = document.getElementById("answerArea1");
-    const yesBtn1 = document.getElementById("yesBtn1");
-    const noBtn1 = document.getElementById("noBtn1");
-    const responseLine1 = document.getElementById("responseLine1");
-
-    let noCount1 = 0;
-    const noTexts1 = [
-      "No",
-      "Really no?",
-      "Still no?",
-      "Soch lo",
-      "Pakka?",
-      "Ab bhi no?"
-    ];
-
     yesBtn1.addEventListener("click", () => {
-      responseLine1.textContent = "Okay... memories khol rahe hain ✨";
+      feedback1.textContent = "Opening memories... ✨";
       goToPage("gallery.html");
     });
 
     noBtn1.addEventListener("click", () => {
       noCount1++;
-
-      const index = Math.min(noCount1, noTexts1.length - 1);
-      noBtn1.textContent = noTexts1[index];
+      noBtn1.textContent = noTexts1[Math.min(noCount1, noTexts1.length - 1)];
 
       const areaWidth = answerArea1.clientWidth;
       const areaHeight = answerArea1.clientHeight;
-      const btnWidth = Math.max(62, 92 - noCount1 * 6);
-      const btnHeight = Math.max(26, 36 - noCount1 * 2);
 
-      noBtn1.style.width = btnWidth + "px";
-      noBtn1.style.height = btnHeight + "px";
-      noBtn1.style.fontSize = Math.max(0.72, 0.98 - noCount1 * 0.05) + "rem";
+      const width = Math.max(58, 88 - noCount1 * 5);
+      const font = Math.max(0.72, 1 - noCount1 * 0.05);
 
-      const maxX = Math.max(8, areaWidth - btnWidth - 8);
-      const maxY = Math.max(8, areaHeight - btnHeight - 8);
+      noBtn1.style.width = width + "px";
+      noBtn1.style.fontSize = font + "rem";
+
+      const maxX = Math.max(12, areaWidth - width - 10);
+      const minY = 8;
+      const maxY = Math.max(16, areaHeight - 34);
 
       const x = Math.floor(Math.random() * maxX);
-      const y = Math.floor(Math.random() * maxY);
+      const y = Math.floor(Math.random() * (maxY - minY + 1)) + minY;
 
       noBtn1.style.left = x + "px";
       noBtn1.style.top = y + "px";
       noBtn1.style.transform = "none";
 
-      responseLine1.textContent = "Hmm... lagta hai answer change ho raha hai 😏";
+      feedback1.textContent = "Hmm... jawab interesting ho raha hai 😏";
     });
   </script>
 </body>
