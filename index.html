@@ -1,0 +1,401 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Belated Birthday Amara Shaha</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: radial-gradient(circle at top, #2d0f3a 0%, #16081f 35%, #09050d 100%);
+  color: #fff;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.glow {
+  position: fixed;
+  width: 420px;
+  height: 420px;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.28;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.g1 { background: #ff4fd8; top: -120px; left: -100px; }
+.g2 { background: #7d5cff; bottom: -140px; right: -100px; }
+
+.container {
+  position: relative;
+  z-index: 2;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px 0;
+}
+
+.card {
+  width: 100%;
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 28px;
+  padding: 30px 22px;
+  box-shadow: 0 25px 60px rgba(0,0,0,0.35);
+  position: relative;
+  overflow: hidden;
+}
+
+.badge {
+  display: inline-block;
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.14);
+  font-size: 13px;
+  margin-bottom: 18px;
+  color: #ffd8f6;
+}
+
+h1 {
+  font-size: clamp(2rem, 6vw, 4.5rem);
+  margin-bottom: 14px;
+  line-height: 1.1;
+}
+
+.name {
+  background: linear-gradient(90deg, #ffd3f5, #ffffff, #d5ceff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.subtitle {
+  max-width: 760px;
+  margin: 0 auto;
+  font-size: 1.08rem;
+  line-height: 1.8;
+  color: #efe7ff;
+}
+
+.date-note {
+  margin-top: 12px;
+  font-size: 14px;
+  color: #f3cfff;
+}
+
+.type-wrap {
+  margin: 18px auto 0;
+  min-height: 34px;
+  max-width: 760px;
+  color: #ffe7fb;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.cursor {
+  display: inline-block;
+  margin-left: 4px;
+  animation: blink 0.8s infinite;
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+.btns {
+  margin-top: 24px;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn {
+  text-decoration: none;
+  color: #fff;
+  padding: 12px 18px;
+  border-radius: 14px;
+  font-weight: bold;
+  border: 1px solid rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.08);
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  background: rgba(255,255,255,0.14);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #ff4fd8, #8e6bff);
+}
+
+.section-title {
+  font-size: 1.4rem;
+  margin: 30px 0 14px;
+  color: #fff;
+  text-align: left;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.mini {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 18px;
+  padding: 18px;
+  line-height: 1.7;
+  color: #f5ecff;
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  margin-top: 16px;
+}
+
+.photo {
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 20px;
+  padding: 14px;
+  text-align: center;
+}
+
+.photo-box {
+  height: 220px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(255,79,216,0.25), rgba(125,92,255,0.25));
+  color: #fff;
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+
+.photo-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.photo small {
+  color: #eadbff;
+}
+
+.message-box {
+  margin-top: 25px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 18px;
+  padding: 22px;
+  text-align: left;
+  line-height: 1.9;
+  color: #f7f0ff;
+}
+
+.signature {
+  margin-top: 18px;
+  display: inline-block;
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding: 10px 16px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(255,79,216,0.18), rgba(125,92,255,0.18));
+  border: 1px solid rgba(255,255,255,0.14);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.18);
+}
+
+.footer {
+  text-align: center;
+  margin-top: 30px;
+  font-size: 14px;
+  color: #d8c9ef;
+}
+
+.heart {
+  position: absolute;
+  font-size: 18px;
+  opacity: 0.2;
+  animation: floatUp linear infinite;
+  pointer-events: none;
+}
+
+@keyframes floatUp {
+  0% { transform: translateY(40px) scale(0.9); opacity: 0; }
+  10% { opacity: 0.22; }
+  100% { transform: translateY(-100vh) scale(1.15); opacity: 0; }
+}
+
+@media (max-width: 768px) {
+  .grid,
+  .gallery {
+    grid-template-columns: 1fr;
+  }
+
+  .card {
+    padding: 24px 16px;
+  }
+
+  .photo-box {
+    height: 240px;
+  }
+}
+
+  </style>
+</head>
+<body>
+  <div class="glow g1"></div>
+  <div class="glow g2"></div>  <div class="container hero">
+    <div class="card">
+      <div id="hearts"></div><div class="badge">Belated Birthday • 16 April</div>
+
+  <h1>Happy Belated Birthday <span class="name">Amara Shaha</span> 🎉</h1>
+
+  <p class="subtitle">
+    To an amazing teammate and respected ma’am — this website is specially made for you with warmth, respect, and beautiful wishes.
+  </p>
+
+  <p class="date-note">Birthday: 16 April 💖</p>
+
+  <div class="type-wrap">
+    <span id="typedText"></span><span class="cursor">|</span>
+  </div>
+
+  <div class="btns">
+    <a href="#message" class="btn btn-primary">Message</a>
+    <a href="#gallery" class="btn">Gallery</a>
+    <a href="#highlights" class="btn">Highlights</a>
+    <button class="btn" id="musicBtn" type="button">Play Music</button>
+  </div>
+
+  <h2 class="section-title" id="highlights">Special Highlights</h2>
+  <div class="grid">
+    <div class="mini">🌸 Elegant and calm personality that brings a positive vibe everywhere.</div>
+    <div class="mini">✨ Strong, supportive, and valuable teammate in work and effort.</div>
+    <div class="mini">🎂 May this new year bring happiness, success, and endless blessings.</div>
+  </div>
+
+  <h2 class="section-title" id="gallery">Memories Gallery</h2>
+  <div class="gallery">
+    <div class="photo">
+      <div class="photo-box">Add Photo 1</div>
+      <small>Best moment placeholder</small>
+    </div>
+    <div class="photo">
+      <div class="photo-box">Add Photo 2</div>
+      <small>Team memory placeholder</small>
+    </div>
+    <div class="photo">
+      <div class="photo-box">Add Photo 3</div>
+      <small>Special day placeholder</small>
+    </div>
+  </div>
+
+  <div class="message-box" id="message">
+    <p><strong>Dear Amara,</strong></p>
+    <p>
+      Happy Belated Birthday! 🎉 Even though this wish is a little late, the respect, appreciation, and warm feelings behind it are completely real.
+    </p>
+    <p>
+      You are not just a teammate, but someone truly special and admirable. Your presence, your effort, and your personality make you stand out beautifully.
+    </p>
+    <p>
+      May your new year be full of happiness, peace, success, and unforgettable moments. Keep smiling, keep shining, and keep being amazing.
+    </p>
+    <div class="signature">— From NX 💐</div>
+  </div>
+</div>
+
+  </div>  <div class="footer">Made with ❤️ for Amara Shaha</div>  <audio id="bgMusic" loop>
+    <source src="birthday-music.mp3" type="audio/mpeg">
+  </audio>  <script>
+    const heartsWrap = document.getElementById('hearts');
+    const icons = ['💖', '✨', '🎉', '🌸', '💜'];
+    for (let i = 0; i < 24; i++) {
+      const span = document.createElement('span');
+      span.className = 'heart';
+      span.textContent = icons[Math.floor(Math.random() * icons.length)];
+      span.style.left = Math.random() * 100 + '%';
+      span.style.top = (70 + Math.random() * 30) + '%';
+      span.style.animationDuration = (7 + Math.random() * 8) + 's';
+      span.style.animationDelay = (Math.random() * 6) + 's';
+      heartsWrap.appendChild(span);
+    }
+
+    const lines = [
+      'Wishing you joy, success, and beautiful moments ✨',
+      'A special wish for a special teammate 💖',
+      'Stay blessed, smiling, and shining always 🌸'
+    ];
+    const typedText = document.getElementById('typedText');
+    let lineIndex = 0;
+    let charIndex = 0;
+    let deleting = false;
+
+    function typeEffect() {
+      const current = lines[lineIndex];
+      if (!deleting) {
+        typedText.textContent = current.slice(0, charIndex + 1);
+        charIndex++;
+        if (charIndex === current.length) {
+          deleting = true;
+          setTimeout(typeEffect, 1300);
+          return;
+        }
+      } else {
+        typedText.textContent = current.slice(0, charIndex - 1);
+        charIndex--;
+        if (charIndex === 0) {
+          deleting = false;
+          lineIndex = (lineIndex + 1) % lines.length;
+        }
+      }
+      setTimeout(typeEffect, deleting ? 40 : 75);
+    }
+    typeEffect();
+
+    const music = document.getElementById('bgMusic');
+    const musicBtn = document.getElementById('musicBtn');
+    let isPlaying = false;
+
+    musicBtn.addEventListener('click', async () => {
+      try {
+        if (!isPlaying) {
+          await music.play();
+          isPlaying = true;
+          musicBtn.textContent = 'Pause Music';
+        } else {
+          music.pause();
+          isPlaying = false;
+          musicBtn.textContent = 'Play Music';
+        }
+      } catch (e) {
+        alert('Music file add karo: birthday-music.mp3');
+      }
+    });
+  </script></body>
+  </html>
