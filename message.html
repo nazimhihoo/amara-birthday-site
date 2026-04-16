@@ -6,21 +6,32 @@
   <title>Final Message for Amara</title>
   <link rel="stylesheet" href="style.css" />
 </head>
-<body>
-  <div class="page-shell">
-    <main class="screen message-screen">
-      <div class="bg-balloons balloons-left"></div>
-      <div class="bg-balloons balloons-right"></div>
-      <div class="sparkles"></div>
+<body class="message-page">
+  <audio id="birthdayMusic" autoplay loop>
+    <source src="birthday-music.mp3" type="audio/mpeg" />
+  </audio>
 
-      <section class="main-card message-card">
-        <div class="badge">Final Message</div>
+  <div class="page-shell" id="pageShell">
+    <div class="floating-balloons">
+      <span class="balloon balloon-1"></span>
+      <span class="balloon balloon-2"></span>
+      <span class="balloon balloon-3"></span>
+      <span class="balloon balloon-4"></span>
+      <span class="balloon balloon-5"></span>
+      <span class="balloon balloon-6"></span>
+    </div>
 
-        <h1 class="main-title smaller-title">
+    <div class="snow-wrap" id="snowWrap"></div>
+
+    <main class="screen">
+      <section class="hero-block final-message-block">
+        <p class="top-kicker">Final Message</p>
+
+        <h1 class="main-title memories-title">
           For <span>Amara Shaha</span> 💐
         </h1>
 
-        <div class="message-box">
+        <div class="message-text-block">
           <p><strong>Dear Amara,</strong></p>
 
           <p>Assalamualaikum.</p>
@@ -36,34 +47,44 @@
           <p class="from-line">— From NX</p>
         </div>
 
-        <div class="final-actions">
-          <button class="music-btn" id="musicBtn">Play Music</button>
+        <div class="music-row">
+          <button class="music-btn" id="musicBtn">Pause Music</button>
         </div>
-
-        <audio id="birthdayMusic" loop>
-          <source src="birthday-music.mp3" type="audio/mpeg" />
-        </audio>
       </section>
     </main>
   </div>
 
   <script>
+    const music = document.getElementById("birthdayMusic");
+    music.volume = 0.5;
+
+    const snowWrap = document.getElementById("snowWrap");
+    for (let i = 0; i < 34; i++) {
+      const snow = document.createElement("span");
+      snow.className = "snowflake";
+      snow.style.left = Math.random() * 100 + "%";
+      snow.style.animationDuration = (7 + Math.random() * 10) + "s";
+      snow.style.animationDelay = (Math.random() * 8) + "s";
+      snow.style.opacity = 0.25 + Math.random() * 0.55;
+      snow.style.transform = `scale(${0.6 + Math.random() * 1.2})`;
+      snowWrap.appendChild(snow);
+    }
+
     const musicBtn = document.getElementById("musicBtn");
-    const birthdayMusic = document.getElementById("birthdayMusic");
-    let isPlaying = false;
+    let isPlaying = true;
 
     musicBtn.addEventListener("click", async () => {
       try {
-        if (!isPlaying) {
-          await birthdayMusic.play();
-          isPlaying = true;
-          musicBtn.textContent = "Pause Music";
-        } else {
-          birthdayMusic.pause();
+        if (isPlaying) {
+          music.pause();
           isPlaying = false;
           musicBtn.textContent = "Play Music";
+        } else {
+          await music.play();
+          isPlaying = true;
+          musicBtn.textContent = "Pause Music";
         }
-      } catch (error) {
+      } catch (e) {
         alert("birthday-music.mp3 file check karo.");
       }
     });
