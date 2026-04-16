@@ -1,72 +1,176 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Amara Birthday</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Birthday Amara</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
-<body>
+<body class="home-page">
+  <audio id="birthdayMusic" autoplay loop>
+    <source src="birthday-music.mp3" type="audio/mpeg" />
+  </audio>
 
-<audio id="music" autoplay loop>
-  <source src="birthday-music.mp3">
-</audio>
+  <div class="page-shell" id="pageShell">
+    <div class="floating-balloons">
+      <span class="balloon balloon-1"></span>
+      <span class="balloon balloon-2"></span>
+      <span class="balloon balloon-3"></span>
+      <span class="balloon balloon-4"></span>
+      <span class="balloon balloon-5"></span>
+      <span class="balloon balloon-6"></span>
+    </div>
 
-<div class="page">
+    <div class="snow-wrap" id="snowWrap"></div>
 
-  <h1>Happy Birthday <span>Amara</span> 🎉</h1>
+    <main class="screen">
+      <section class="hero-block">
+        <p class="top-kicker">Birthday Special</p>
 
-  <img src="birthday-banner.png" class="hero">
+        <h1 class="main-title">
+          Happy Birthday
+          <span>Amara Shaha</span>
+          🎉
+        </h1>
 
-  <p class="question">
-    Kya tumne apne bhai se aisa surprise expect kiya tha? 😌
-  </p>
+        <p class="main-subtitle">
+          A small surprise, soft vibes, and a special little experience made just for you.
+        </p>
 
-  <div class="choices">
-    <span class="yes" onclick="goNext()">YES</span>
-    <span class="no" id="noBtn">NO</span>
+        <p class="typing-line">
+          <span id="typedText"></span><span class="cursor">|</span>
+        </p>
+
+        <div class="hero-image-stage">
+          <img src="birthday-banner.png" alt="Birthday Banner" class="hero-image" />
+        </div>
+
+        <div class="question-line">
+          Kya tumne apne bhai se aisa surprise expect kiya tha?
+        </div>
+
+        <div class="answer-line" id="answerArea1">
+          <span class="answer yes-answer" id="yesBtn1">Yes</span>
+          <span class="answer no-answer" id="noBtn1">No</span>
+        </div>
+
+        <p class="response-line" id="responseLine1">
+          Sach sach jawab dena 😌
+        </p>
+      </section>
+    </main>
   </div>
 
-</div>
+  <script>
+    const music = document.getElementById("birthdayMusic");
+    music.volume = 0.5;
 
-<script>
-const music = document.getElementById("music");
-music.volume = 0.5;
+    const shell = document.getElementById("pageShell");
+    const snowWrap = document.getElementById("snowWrap");
 
-let noBtn = document.getElementById("noBtn");
-let noCount = 0;
+    for (let i = 0; i < 34; i++) {
+      const snow = document.createElement("span");
+      snow.className = "snowflake";
+      snow.style.left = Math.random() * 100 + "%";
+      snow.style.animationDuration = (7 + Math.random() * 10) + "s";
+      snow.style.animationDelay = (Math.random() * 8) + "s";
+      snow.style.opacity = 0.25 + Math.random() * 0.55;
+      snow.style.transform = `scale(${0.6 + Math.random() * 1.2})`;
+      snowWrap.appendChild(snow);
+    }
 
-let texts = [
-  "NO",
-  "Really NO?",
-  "Soch lo 😏",
-  "Still NO?",
-  "Sure? 😂",
-  "Ab bhi NO?",
-  "Zyada ho gaya 😭"
-];
+    const lines = [
+      "A special birthday surprise ✨",
+      "Soft vibes, warm wishes, pretty moments 💖",
+      "Made to feel a little magical 🌸"
+    ];
 
-noBtn.onclick = () => {
-  noCount++;
+    const typedText = document.getElementById("typedText");
+    let lineIndex = 0;
+    let charIndex = 0;
+    let deleting = false;
 
-  // change text
-  noBtn.innerText = texts[Math.min(noCount, texts.length-1)];
+    function typeEffect() {
+      const current = lines[lineIndex];
 
-  // random move
-  let x = Math.random() * 300 - 150;
-  let y = Math.random() * 200 - 100;
+      if (!deleting) {
+        typedText.textContent = current.slice(0, charIndex + 1);
+        charIndex++;
 
-  noBtn.style.transform = `translate(${x}px, ${y}px) scale(${1 - noCount*0.1})`;
+        if (charIndex === current.length) {
+          deleting = true;
+          setTimeout(typeEffect, 1100);
+          return;
+        }
+      } else {
+        typedText.textContent = current.slice(0, charIndex - 1);
+        charIndex--;
 
-  // shrink
-  noBtn.style.fontSize = (18 - noCount*2) + "px";
-};
+        if (charIndex === 0) {
+          deleting = false;
+          lineIndex = (lineIndex + 1) % lines.length;
+        }
+      }
 
-function goNext(){
-  document.body.style.opacity = "0";
-  setTimeout(()=>{
-    window.location.href = "gallery.html";
-  }, 400);
-}
-</script>
+      setTimeout(typeEffect, deleting ? 38 : 68);
+    }
 
+    typeEffect();
+
+    function goToPage(url) {
+      shell.classList.add("page-out");
+      setTimeout(() => {
+        window.location.href = url;
+      }, 380);
+    }
+
+    const answerArea1 = document.getElementById("answerArea1");
+    const yesBtn1 = document.getElementById("yesBtn1");
+    const noBtn1 = document.getElementById("noBtn1");
+    const responseLine1 = document.getElementById("responseLine1");
+
+    let noCount1 = 0;
+    const noTexts1 = [
+      "No",
+      "Really no?",
+      "Still no?",
+      "Soch lo",
+      "Pakka?",
+      "Ab bhi no?"
+    ];
+
+    yesBtn1.addEventListener("click", () => {
+      responseLine1.textContent = "Okay... memories khol rahe hain ✨";
+      goToPage("gallery.html");
+    });
+
+    noBtn1.addEventListener("click", () => {
+      noCount1++;
+
+      const index = Math.min(noCount1, noTexts1.length - 1);
+      noBtn1.textContent = noTexts1[index];
+
+      const areaWidth = answerArea1.clientWidth;
+      const areaHeight = answerArea1.clientHeight;
+      const btnWidth = Math.max(62, 92 - noCount1 * 6);
+      const btnHeight = Math.max(26, 36 - noCount1 * 2);
+
+      noBtn1.style.width = btnWidth + "px";
+      noBtn1.style.height = btnHeight + "px";
+      noBtn1.style.fontSize = Math.max(0.72, 0.98 - noCount1 * 0.05) + "rem";
+
+      const maxX = Math.max(8, areaWidth - btnWidth - 8);
+      const maxY = Math.max(8, areaHeight - btnHeight - 8);
+
+      const x = Math.floor(Math.random() * maxX);
+      const y = Math.floor(Math.random() * maxY);
+
+      noBtn1.style.left = x + "px";
+      noBtn1.style.top = y + "px";
+      noBtn1.style.transform = "none";
+
+      responseLine1.textContent = "Hmm... lagta hai answer change ho raha hai 😏";
+    });
+  </script>
 </body>
 </html>
