@@ -1,146 +1,72 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Happy Birthday Amara</title>
-  <link rel="stylesheet" href="style.css" />
+<title>Amara Birthday</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="page-shell">
-    <main class="screen home-screen">
-      <div class="bg-balloons balloons-left"></div>
-      <div class="bg-balloons balloons-right"></div>
-      <div class="sparkles"></div>
 
-      <section class="main-card hero-card">
-        <div class="badge">Birthday Special</div>
+<audio id="music" autoplay loop>
+  <source src="birthday-music.mp3">
+</audio>
 
-        <h1 class="main-title">
-          Happy Birthday
-          <span>Amara Shaha</span>
-          🎉
-        </h1>
+<div class="page">
 
-        <p class="subtitle">
-          A small birthday surprise made specially for you — soft, special, and full of beautiful vibes.
-        </p>
+  <h1>Happy Birthday <span>Amara</span> 🎉</h1>
 
-        <p class="type-line">
-          <span id="typedText"></span><span class="cursor">|</span>
-        </p>
+  <img src="birthday-banner.png" class="hero">
 
-        <div class="hero-image-wrap">
-          <img src="birthday-banner.png" alt="Birthday Banner for Amara" class="hero-image" />
-        </div>
+  <p class="question">
+    Kya tumne apne bhai se aisa surprise expect kiya tha? 😌
+  </p>
 
-        <div class="question-card">
-          <h2>Do you want to enter the memories? 💖</h2>
-          <p>Be honest... but not too honest 😌</p>
-
-          <div class="choice-area" id="choiceArea1">
-            <button class="choice-btn yes-btn" id="yesBtn1">Yes</button>
-            <button class="choice-btn no-btn" id="noBtn1">No</button>
-          </div>
-
-          <div class="choice-note" id="choiceNote1">The yes button already looks smarter.</div>
-        </div>
-      </section>
-    </main>
+  <div class="choices">
+    <span class="yes" onclick="goNext()">YES</span>
+    <span class="no" id="noBtn">NO</span>
   </div>
 
-  <script>
-    const lines = [
-      "A special birthday surprise ✨",
-      "Soft, elegant, and memorable 💖",
-      "Made with warm wishes 🌸"
-    ];
+</div>
 
-    const typedText = document.getElementById("typedText");
-    let lineIndex = 0;
-    let charIndex = 0;
-    let deleting = false;
+<script>
+const music = document.getElementById("music");
+music.volume = 0.5;
 
-    function typeEffect() {
-      const current = lines[lineIndex];
+let noBtn = document.getElementById("noBtn");
+let noCount = 0;
 
-      if (!deleting) {
-        typedText.textContent = current.slice(0, charIndex + 1);
-        charIndex++;
+let texts = [
+  "NO",
+  "Really NO?",
+  "Soch lo 😏",
+  "Still NO?",
+  "Sure? 😂",
+  "Ab bhi NO?",
+  "Zyada ho gaya 😭"
+];
 
-        if (charIndex === current.length) {
-          deleting = true;
-          setTimeout(typeEffect, 1200);
-          return;
-        }
-      } else {
-        typedText.textContent = current.slice(0, charIndex - 1);
-        charIndex--;
+noBtn.onclick = () => {
+  noCount++;
 
-        if (charIndex === 0) {
-          deleting = false;
-          lineIndex = (lineIndex + 1) % lines.length;
-        }
-      }
+  // change text
+  noBtn.innerText = texts[Math.min(noCount, texts.length-1)];
 
-      setTimeout(typeEffect, deleting ? 40 : 72);
-    }
+  // random move
+  let x = Math.random() * 300 - 150;
+  let y = Math.random() * 200 - 100;
 
-    typeEffect();
+  noBtn.style.transform = `translate(${x}px, ${y}px) scale(${1 - noCount*0.1})`;
 
-    const pageShell = document.querySelector(".page-shell");
-    const choiceArea1 = document.getElementById("choiceArea1");
-    const yesBtn1 = document.getElementById("yesBtn1");
-    const noBtn1 = document.getElementById("noBtn1");
-    const choiceNote1 = document.getElementById("choiceNote1");
+  // shrink
+  noBtn.style.fontSize = (18 - noCount*2) + "px";
+};
 
-    let noClicks1 = 0;
-    const noTexts1 = ["No", "Really?", "Still No?", "Think Again", "Too Late 😄"];
+function goNext(){
+  document.body.style.opacity = "0";
+  setTimeout(()=>{
+    window.location.href = "gallery.html";
+  }, 400);
+}
+</script>
 
-    function moveNoButton(button, area, clickCount) {
-      const minWidth = 76;
-      const minHeight = 34;
-      const width = Math.max(minWidth, 138 - clickCount * 14);
-      const height = Math.max(minHeight, 52 - clickCount * 4);
-
-      button.style.width = width + "px";
-      button.style.height = height + "px";
-      button.style.fontSize = Math.max(0.72, 1 - clickCount * 0.06) + "rem";
-
-      const maxX = Math.max(8, area.clientWidth - width - 8);
-      const maxY = Math.max(8, area.clientHeight - height - 8);
-
-      const randomX = Math.floor(Math.random() * maxX);
-      const randomY = Math.floor(Math.random() * maxY);
-
-      button.style.left = randomX + "px";
-      button.style.top = randomY + "px";
-      button.style.transform = "none";
-    }
-
-    function goToPage(url) {
-      pageShell.classList.add("page-out");
-      setTimeout(() => {
-        window.location.href = url;
-      }, 380);
-    }
-
-    yesBtn1.addEventListener("click", () => {
-      choiceNote1.textContent = "Opening memories... ✨";
-      goToPage("gallery.html");
-    });
-
-    noBtn1.addEventListener("click", () => {
-      noClicks1++;
-      noBtn1.textContent = noTexts1[Math.min(noClicks1, noTexts1.length - 1)];
-      choiceNote1.textContent = "No is getting weaker. Yes is clearly the better option 😌";
-      moveNoButton(noBtn1, choiceArea1, noClicks1);
-
-      if (noClicks1 >= 5) {
-        choiceNote1.textContent = "Okay... opening memories anyway 💖";
-        setTimeout(() => goToPage("gallery.html"), 350);
-      }
-    });
-  </script>
 </body>
 </html>
