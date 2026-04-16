@@ -6,79 +6,98 @@
   <title>Amara Memories</title>
   <link rel="stylesheet" href="style.css" />
 </head>
-<body>
-  <div class="page-shell">
-    <main class="screen memories-screen">
-      <div class="bg-balloons balloons-left"></div>
-      <div class="bg-balloons balloons-right"></div>
-      <div class="sparkles"></div>
+<body class="gallery-page">
+  <audio id="birthdayMusic" autoplay loop>
+    <source src="birthday-music.mp3" type="audio/mpeg" />
+  </audio>
 
-      <section class="main-card">
-        <div class="badge">Memories</div>
+  <div class="page-shell" id="pageShell">
+    <div class="floating-balloons">
+      <span class="balloon balloon-1"></span>
+      <span class="balloon balloon-2"></span>
+      <span class="balloon balloon-3"></span>
+      <span class="balloon balloon-4"></span>
+      <span class="balloon balloon-5"></span>
+      <span class="balloon balloon-6"></span>
+    </div>
 
-        <h1 class="main-title smaller-title">
+    <div class="snow-wrap" id="snowWrap"></div>
+
+    <main class="screen">
+      <section class="hero-block">
+        <p class="top-kicker">Memories</p>
+
+        <h1 class="main-title memories-title">
           <span>Amara</span> Moments 📸
         </h1>
 
-        <p class="subtitle">
-          One memory at a time — smooth, stylish, and way better than a boring image row.
+        <p class="main-subtitle">
+          One picture at a time. Smooth transition. Soft vibe. Proper special feeling.
         </p>
 
-        <div class="memory-slider-card">
-          <div class="memory-slider-stage">
-            <div class="memory-slide active">
-              <img src="amara1.jpg" alt="Amara memory 1" />
-            </div>
-            <div class="memory-slide">
-              <img src="amara2.jpg" alt="Amara memory 2" />
-            </div>
-            <div class="memory-slide">
-              <img src="amara3.jpg" alt="Amara memory 3" />
-            </div>
-          </div>
-
-          <div class="memory-caption" id="memoryCaption">Birthday special memory</div>
-
-          <div class="memory-dots">
-            <span class="memory-dot active"></span>
-            <span class="memory-dot"></span>
-            <span class="memory-dot"></span>
-          </div>
+        <div class="memory-stage">
+          <img src="amara1.jpg" alt="Amara Memory 1" class="memory-image active" />
+          <img src="amara2.jpg" alt="Amara Memory 2" class="memory-image" />
+          <img src="amara3.jpg" alt="Amara Memory 3" class="memory-image" />
         </div>
 
-        <div class="question-card">
-          <h2>Do you want to open the final message? 🌸</h2>
-          <p>This is the part you should definitely not skip.</p>
+        <p class="memory-caption" id="memoryCaption">Birthday special memory</p>
 
-          <div class="choice-area" id="choiceArea2">
-            <button class="choice-btn yes-btn" id="yesBtn2">Yes</button>
-            <button class="choice-btn no-btn" id="noBtn2">No</button>
-          </div>
-
-          <div class="choice-note" id="choiceNote2">The final message is probably worth it.</div>
+        <div class="dots-row">
+          <span class="dot active"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
         </div>
+
+        <div class="question-line">
+          Ab batao... kya tum final message ke liye ready ho?
+        </div>
+
+        <div class="answer-line" id="answerArea2">
+          <span class="answer yes-answer" id="yesBtn2">Yes</span>
+          <span class="answer no-answer" id="noBtn2">No</span>
+        </div>
+
+        <p class="response-line" id="responseLine2">
+          Message skip karna sahi idea nahi lag raha 😌
+        </p>
       </section>
     </main>
   </div>
 
   <script>
-    const pageShell = document.querySelector(".page-shell");
+    const music = document.getElementById("birthdayMusic");
+    music.volume = 0.5;
+
+    const shell = document.getElementById("pageShell");
+    const snowWrap = document.getElementById("snowWrap");
+
+    for (let i = 0; i < 34; i++) {
+      const snow = document.createElement("span");
+      snow.className = "snowflake";
+      snow.style.left = Math.random() * 100 + "%";
+      snow.style.animationDuration = (7 + Math.random() * 10) + "s";
+      snow.style.animationDelay = (Math.random() * 8) + "s";
+      snow.style.opacity = 0.25 + Math.random() * 0.55;
+      snow.style.transform = `scale(${0.6 + Math.random() * 1.2})`;
+      snowWrap.appendChild(snow);
+    }
 
     function goToPage(url) {
-      pageShell.classList.add("page-out");
+      shell.classList.add("page-out");
       setTimeout(() => {
         window.location.href = url;
       }, 380);
     }
 
-    const slides = document.querySelectorAll(".memory-slide");
-    const dots = document.querySelectorAll(".memory-dot");
-    const memoryCaption = document.getElementById("memoryCaption");
+    const slides = document.querySelectorAll(".memory-image");
+    const dots = document.querySelectorAll(".dot");
+    const caption = document.getElementById("memoryCaption");
 
     const captions = [
       "Birthday special memory",
-      "Soft happy moment",
-      "Princess birthday vibe"
+      "A soft happy moment",
+      "Pretty surprise vibes"
     ];
 
     let currentSlide = 0;
@@ -92,7 +111,7 @@
         dot.classList.toggle("active", i === index);
       });
 
-      memoryCaption.textContent = captions[index];
+      caption.textContent = captions[index];
       currentSlide = index;
     }
 
@@ -102,52 +121,54 @@
       showSlide(next);
     }
 
-    setInterval(nextSlide, 3200);
+    setInterval(nextSlide, 2800);
 
-    const choiceArea2 = document.getElementById("choiceArea2");
+    const answerArea2 = document.getElementById("answerArea2");
     const yesBtn2 = document.getElementById("yesBtn2");
     const noBtn2 = document.getElementById("noBtn2");
-    const choiceNote2 = document.getElementById("choiceNote2");
+    const responseLine2 = document.getElementById("responseLine2");
 
-    let noClicks2 = 0;
-    const noTexts2 = ["No", "Still No?", "Really?", "Last Try", "No Chance 😄"];
-
-    function moveNoButton(button, area, clickCount) {
-      const minWidth = 76;
-      const minHeight = 34;
-      const width = Math.max(minWidth, 138 - clickCount * 14);
-      const height = Math.max(minHeight, 52 - clickCount * 4);
-
-      button.style.width = width + "px";
-      button.style.height = height + "px";
-      button.style.fontSize = Math.max(0.72, 1 - clickCount * 0.06) + "rem";
-
-      const maxX = Math.max(8, area.clientWidth - width - 8);
-      const maxY = Math.max(8, area.clientHeight - height - 8);
-
-      const randomX = Math.floor(Math.random() * maxX);
-      const randomY = Math.floor(Math.random() * maxY);
-
-      button.style.left = randomX + "px";
-      button.style.top = randomY + "px";
-      button.style.transform = "none";
-    }
+    let noCount2 = 0;
+    const noTexts2 = [
+      "No",
+      "Again no?",
+      "Still no?",
+      "Why no?",
+      "Pakka no?",
+      "Last no?"
+    ];
 
     yesBtn2.addEventListener("click", () => {
-      choiceNote2.textContent = "Opening the final message... ✨";
+      responseLine2.textContent = "The final message is opening 💐";
       goToPage("message.html");
     });
 
     noBtn2.addEventListener("click", () => {
-      noClicks2++;
-      noBtn2.textContent = noTexts2[Math.min(noClicks2, noTexts2.length - 1)];
-      choiceNote2.textContent = "No is running away again. The message wants to be opened 😌";
-      moveNoButton(noBtn2, choiceArea2, noClicks2);
+      noCount2++;
 
-      if (noClicks2 >= 5) {
-        choiceNote2.textContent = "Opening the final message anyway 💐";
-        setTimeout(() => goToPage("message.html"), 350);
-      }
+      const index = Math.min(noCount2, noTexts2.length - 1);
+      noBtn2.textContent = noTexts2[index];
+
+      const areaWidth = answerArea2.clientWidth;
+      const areaHeight = answerArea2.clientHeight;
+      const btnWidth = Math.max(62, 92 - noCount2 * 6);
+      const btnHeight = Math.max(26, 36 - noCount2 * 2);
+
+      noBtn2.style.width = btnWidth + "px";
+      noBtn2.style.height = btnHeight + "px";
+      noBtn2.style.fontSize = Math.max(0.72, 0.98 - noCount2 * 0.05) + "rem";
+
+      const maxX = Math.max(8, areaWidth - btnWidth - 8);
+      const maxY = Math.max(8, areaHeight - btnHeight - 8);
+
+      const x = Math.floor(Math.random() * maxX);
+      const y = Math.floor(Math.random() * maxY);
+
+      noBtn2.style.left = x + "px";
+      noBtn2.style.top = y + "px";
+      noBtn2.style.transform = "none";
+
+      responseLine2.textContent = "No button bhi shayad message se bach nahi pa raha 😏";
     });
   </script>
 </body>
