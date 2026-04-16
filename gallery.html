@@ -3,80 +3,151 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Amara Shaha Memories</title>
+  <title>Amara Memories</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="page-shell">
-    <div class="container page-center">
-      <div class="card">
-        <nav class="top-nav">
-          <a href="index.html" class="nav-link" data-page>Home</a>
-          <a href="gallery.html" class="nav-link active" data-page>Memories</a>
-          <a href="message.html" class="nav-link" data-page>Message</a>
-        </nav>
+    <main class="screen memories-screen">
+      <div class="bg-balloons balloons-left"></div>
+      <div class="bg-balloons balloons-right"></div>
+      <div class="sparkles"></div>
 
-        <div class="section-wrap">
-          <div class="badge">Memories Collection</div>
+      <section class="main-card">
+        <div class="badge">Memories</div>
 
-          <h1 class="title">
-            <span class="name">Amara</span> Moments 📸
-          </h1>
+        <h1 class="main-title smaller-title">
+          <span>Amara</span> Moments 📸
+        </h1>
 
-          <p class="subtitle">
-            A simple collection of beautiful birthday-themed moments, kept soft, elegant, and special.
-          </p>
+        <p class="subtitle">
+          One memory at a time — smooth, stylish, and way better than a boring image row.
+        </p>
 
-          <div class="gallery">
-            <div class="photo-card">
-              <div class="photo-box">
-                <img src="amara1.jpg" alt="Amara Memory 1" />
-              </div>
-              <div class="photo-caption">Birthday girl vibes</div>
+        <div class="memory-slider-card">
+          <div class="memory-slider-stage">
+            <div class="memory-slide active">
+              <img src="amara1.jpg" alt="Amara memory 1" />
             </div>
-
-            <div class="photo-card">
-              <div class="photo-box">
-                <img src="amara2.jpg" alt="Amara Memory 2" />
-              </div>
-              <div class="photo-caption">Soft happy moment</div>
+            <div class="memory-slide">
+              <img src="amara2.jpg" alt="Amara memory 2" />
             </div>
-
-            <div class="photo-card">
-              <div class="photo-box">
-                <img src="amara3.jpg" alt="Amara Memory 3" />
-              </div>
-              <div class="photo-caption">Princess-style memory</div>
+            <div class="memory-slide">
+              <img src="amara3.jpg" alt="Amara memory 3" />
             </div>
           </div>
 
-          <div class="note-box">
-            Every picture has a different size and shape, but the gallery is styled in a way that keeps everything clean, balanced, and beautiful.
-          </div>
+          <div class="memory-caption" id="memoryCaption">Birthday special memory</div>
 
-          <div class="btns">
-            <a href="index.html" class="btn" data-page>Back Home</a>
-            <a href="message.html" class="btn btn-primary" data-page>Continue</a>
-          </div>
-
-          <div class="footer">
-            Page 2 of 3 • Clean gallery flow
+          <div class="memory-dots">
+            <span class="memory-dot active"></span>
+            <span class="memory-dot"></span>
+            <span class="memory-dot"></span>
           </div>
         </div>
-      </div>
-    </div>
+
+        <div class="question-card">
+          <h2>Do you want to open the final message? 🌸</h2>
+          <p>This is the part you should definitely not skip.</p>
+
+          <div class="choice-area" id="choiceArea2">
+            <button class="choice-btn yes-btn" id="yesBtn2">Yes</button>
+            <button class="choice-btn no-btn" id="noBtn2">No</button>
+          </div>
+
+          <div class="choice-note" id="choiceNote2">The final message is probably worth it.</div>
+        </div>
+      </section>
+    </main>
   </div>
 
   <script>
-    document.querySelectorAll("a[data-page]").forEach(link => {
-      link.addEventListener("click", function(e) {
-        e.preventDefault();
-        const target = this.getAttribute("href");
-        document.querySelector(".page-shell").classList.add("page-out");
-        setTimeout(() => {
-          window.location.href = target;
-        }, 380);
+    const pageShell = document.querySelector(".page-shell");
+
+    function goToPage(url) {
+      pageShell.classList.add("page-out");
+      setTimeout(() => {
+        window.location.href = url;
+      }, 380);
+    }
+
+    const slides = document.querySelectorAll(".memory-slide");
+    const dots = document.querySelectorAll(".memory-dot");
+    const memoryCaption = document.getElementById("memoryCaption");
+
+    const captions = [
+      "Birthday special memory",
+      "Soft happy moment",
+      "Princess birthday vibe"
+    ];
+
+    let currentSlide = 0;
+
+    function showSlide(index) {
+      slides.forEach((slide, i) => {
+        slide.classList.toggle("active", i === index);
       });
+
+      dots.forEach((dot, i) => {
+        dot.classList.toggle("active", i === index);
+      });
+
+      memoryCaption.textContent = captions[index];
+      currentSlide = index;
+    }
+
+    function nextSlide() {
+      let next = currentSlide + 1;
+      if (next >= slides.length) next = 0;
+      showSlide(next);
+    }
+
+    setInterval(nextSlide, 3200);
+
+    const choiceArea2 = document.getElementById("choiceArea2");
+    const yesBtn2 = document.getElementById("yesBtn2");
+    const noBtn2 = document.getElementById("noBtn2");
+    const choiceNote2 = document.getElementById("choiceNote2");
+
+    let noClicks2 = 0;
+    const noTexts2 = ["No", "Still No?", "Really?", "Last Try", "No Chance 😄"];
+
+    function moveNoButton(button, area, clickCount) {
+      const minWidth = 76;
+      const minHeight = 34;
+      const width = Math.max(minWidth, 138 - clickCount * 14);
+      const height = Math.max(minHeight, 52 - clickCount * 4);
+
+      button.style.width = width + "px";
+      button.style.height = height + "px";
+      button.style.fontSize = Math.max(0.72, 1 - clickCount * 0.06) + "rem";
+
+      const maxX = Math.max(8, area.clientWidth - width - 8);
+      const maxY = Math.max(8, area.clientHeight - height - 8);
+
+      const randomX = Math.floor(Math.random() * maxX);
+      const randomY = Math.floor(Math.random() * maxY);
+
+      button.style.left = randomX + "px";
+      button.style.top = randomY + "px";
+      button.style.transform = "none";
+    }
+
+    yesBtn2.addEventListener("click", () => {
+      choiceNote2.textContent = "Opening the final message... ✨";
+      goToPage("message.html");
+    });
+
+    noBtn2.addEventListener("click", () => {
+      noClicks2++;
+      noBtn2.textContent = noTexts2[Math.min(noClicks2, noTexts2.length - 1)];
+      choiceNote2.textContent = "No is running away again. The message wants to be opened 😌";
+      moveNoButton(noBtn2, choiceArea2, noClicks2);
+
+      if (noClicks2 >= 5) {
+        choiceNote2.textContent = "Opening the final message anyway 💐";
+        setTimeout(() => goToPage("message.html"), 350);
+      }
     });
   </script>
 </body>
