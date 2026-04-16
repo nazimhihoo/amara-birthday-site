@@ -3,54 +3,81 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Amara Shaha Gallery</title>
+  <title>Amara Shaha Memories</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="container page-center">
-    <div class="card">
-      <div class="top-nav">
-        <a href="index.html" class="btn">Home</a>
-        <a href="gallery.html" class="btn btn-primary">Gallery</a>
-        <a href="message.html" class="btn">Message</a>
-      </div>
+  <div class="page-shell">
+    <div class="container page-center">
+      <div class="card">
+        <nav class="top-nav">
+          <a href="index.html" class="nav-link" data-page>Home</a>
+          <a href="gallery.html" class="nav-link active" data-page>Memories</a>
+          <a href="message.html" class="nav-link" data-page>Message</a>
+        </nav>
 
-      <div class="badge">Memories Gallery</div>
-      <h1><span class="name">Amara Shaha</span> Gallery 📸</h1>
-      <p class="subtitle">
-        A little collection of beautiful moments and warm memories.
-      </p>
+        <div class="section-wrap">
+          <div class="badge">Memories Collection</div>
 
-      <div class="gallery">
-        <div class="photo">
-          <div class="photo-box">
-            <img src="amara1.jpg" alt="Amara Photo 1">
+          <h1 class="title">
+            <span class="name">Amara</span> Moments 📸
+          </h1>
+
+          <p class="subtitle">
+            A simple collection of beautiful birthday-themed moments, kept soft, elegant, and special.
+          </p>
+
+          <div class="gallery">
+            <div class="photo-card">
+              <div class="photo-box">
+                <img src="amara1.jpg" alt="Amara Memory 1" />
+              </div>
+              <div class="photo-caption">Birthday girl vibes</div>
+            </div>
+
+            <div class="photo-card">
+              <div class="photo-box">
+                <img src="amara2.jpg" alt="Amara Memory 2" />
+              </div>
+              <div class="photo-caption">Soft happy moment</div>
+            </div>
+
+            <div class="photo-card">
+              <div class="photo-box">
+                <img src="amara3.jpg" alt="Amara Memory 3" />
+              </div>
+              <div class="photo-caption">Princess-style memory</div>
+            </div>
           </div>
-          <small>Beautiful Moment</small>
-        </div>
 
-        <div class="photo">
-          <div class="photo-box">
-            <img src="amara2.jpg" alt="Amara Photo 2">
+          <div class="note-box">
+            Every picture has a different size and shape, but the gallery is styled in a way that keeps everything clean, balanced, and beautiful.
           </div>
-          <small>Happy Vibes</small>
-        </div>
 
-        <div class="photo">
-          <div class="photo-box">
-            <img src="amara3.jpg" alt="Amara Photo 3">
+          <div class="btns">
+            <a href="index.html" class="btn" data-page>Back Home</a>
+            <a href="message.html" class="btn btn-primary" data-page>Continue</a>
           </div>
-          <small>Special Day</small>
+
+          <div class="footer">
+            Page 2 of 3 • Clean gallery flow
+          </div>
         </div>
       </div>
-
-      <div class="btns">
-        <a href="index.html" class="btn">Back Home</a>
-        <a href="message.html" class="btn btn-primary">Next Page</a>
-      </div>
-
-      <div class="footer">Page 2 of 3 • Made with ❤️ for Amara Shaha</div>
     </div>
   </div>
+
+  <script>
+    document.querySelectorAll("a[data-page]").forEach(link => {
+      link.addEventListener("click", function(e) {
+        e.preventDefault();
+        const target = this.getAttribute("href");
+        document.querySelector(".page-shell").classList.add("page-out");
+        setTimeout(() => {
+          window.location.href = target;
+        }, 380);
+      });
+    });
+  </script>
 </body>
 </html>
