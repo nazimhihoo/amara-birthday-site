@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Happy Birthday Amara</title>
+  <title>Happy Birthday Amara Shaha</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -11,57 +11,94 @@
     <source src="birthday-music.mp3" type="audio/mpeg" />
   </audio>
 
-  <div class="page-shell" id="pageShell">
-    <div class="bg-gradient"></div>
-    <div class="snow-wrap" id="snowWrap"></div>
+  <div class="bg-gradient"></div>
+  <div class="stars"></div>
+  <div class="snow-wrap" id="snowWrap"></div>
 
-    <div class="balloons left-balloons">
-      <span class="balloon b1"></span>
-      <span class="balloon b2"></span>
-      <span class="balloon b3"></span>
-    </div>
-
-    <div class="balloons right-balloons">
-      <span class="balloon b4"></span>
-      <span class="balloon b5"></span>
-      <span class="balloon b6"></span>
-    </div>
-
-    <main class="screen">
-      <section class="hero">
-        <p class="kicker">Birthday Special</p>
-
-        <h1 class="title">
-          Happy Birthday
-          <span>Amara Shaha</span>
-          🎉
-        </h1>
-
-        <p class="subtitle">
-          A soft little surprise, made specially for you.
-        </p>
-
-        <p class="typing-line">
-          <span id="typedText"></span><span class="cursor">|</span>
-        </p>
-
-        <div class="hero-image-wrap">
-          <img src="birthday-banner.png" alt="Birthday Banner" class="hero-image" />
-        </div>
-
-        <p class="question">
-          Kya tumne apne bhai se aisa surprise expect kiya tha?
-        </p>
-
-        <div class="answer-line" id="answerArea1">
-          <span class="answer yes-answer" id="yesBtn1">Yes</span>
-          <span class="answer no-answer" id="noBtn1">No</span>
-        </div>
-
-        <p class="feedback" id="feedback1">Sach sach jawab dena 😌</p>
-      </section>
-    </main>
+  <div class="balloons">
+    <span class="balloon b1"></span>
+    <span class="balloon b2"></span>
+    <span class="balloon b3"></span>
+    <span class="balloon b4"></span>
+    <span class="balloon b5"></span>
+    <span class="balloon b6"></span>
+    <span class="balloon b7"></span>
+    <span class="balloon b8"></span>
   </div>
+
+  <main class="page">
+    <section class="hero-card">
+      <p class="tiny-kicker">A Special Birthday Website</p>
+
+      <h1 class="main-title">
+        Happy Birthday
+        <span>Amara Shaha</span>
+        🎉
+      </h1>
+
+      <p class="subtitle">
+        A soft little surprise, made specially for you.
+      </p>
+
+      <div class="stage" id="stage">
+        <div class="glow-orb orb-left"></div>
+        <div class="glow-orb orb-right"></div>
+
+        <div class="scene active" data-scene="0">
+          <div class="scene-text">
+            <p class="scene-top">Shall we begin? ✨</p>
+            <h2 class="scene-heading">A small surprise is waiting for you</h2>
+            <p class="scene-sub">Close your eyes and make a sweet wish 💖</p>
+          </div>
+          <div class="sticker-float">🐼</div>
+        </div>
+
+        <div class="scene" data-scene="1">
+          <div class="scene-text">
+            <p class="scene-top">Guess what? 🎁</p>
+            <h2 class="scene-heading">Smiles, warmth, and little moments await you</h2>
+            <p class="scene-sub">Today is all about soft vibes and beautiful feelings 🌸</p>
+          </div>
+          <div class="sticker-float">🐰</div>
+        </div>
+
+        <div class="scene" data-scene="2">
+          <div class="scene-text">
+            <p class="scene-top">For Amara 💐</p>
+            <h2 class="scene-heading">May your day feel light, lovely, and special</h2>
+            <p class="scene-sub">A birthday deserves beautiful moments and peaceful smiles ✨</p>
+          </div>
+          <div class="sticker-float">🎀</div>
+        </div>
+
+        <div class="scene" data-scene="3">
+          <div class="scene-text">
+            <p class="scene-top">A gentle prayer 🤍</p>
+            <h2 class="scene-heading">May Allah fill your life with peace, health, and barakah</h2>
+            <p class="scene-sub">And may every next day bring khair for you</p>
+          </div>
+          <div class="sticker-float">🌙</div>
+        </div>
+
+        <div class="scene" data-scene="4">
+          <div class="scene-text">
+            <p class="scene-top">Belated, but from the heart 💗</p>
+            <h2 class="scene-heading">Happy Birthday Amara Shaha</h2>
+            <p class="scene-sub">— From NX</p>
+          </div>
+          <div class="sticker-float">🎂</div>
+        </div>
+      </div>
+
+      <div class="dots" id="dots">
+        <span class="dot active"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+      </div>
+    </section>
+  </main>
 
   <script>
     const music = document.getElementById("birthdayMusic");
@@ -83,99 +120,32 @@
     tryStartMusic();
 
     const snowWrap = document.getElementById("snowWrap");
-    for (let i = 0; i < 30; i++) {
+    for (let i = 0; i < 40; i++) {
       const flake = document.createElement("span");
       flake.className = "snowflake";
       flake.style.left = Math.random() * 100 + "%";
-      flake.style.animationDuration = (7 + Math.random() * 8) + "s";
-      flake.style.animationDelay = (Math.random() * 6) + "s";
-      flake.style.opacity = 0.25 + Math.random() * 0.5;
-      flake.style.transform = `scale(${0.6 + Math.random()})`;
+      flake.style.animationDuration = (8 + Math.random() * 10) + "s";
+      flake.style.animationDelay = (Math.random() * 8) + "s";
+      flake.style.opacity = 0.18 + Math.random() * 0.45;
+      flake.style.transform = `scale(${0.5 + Math.random() * 1.1})`;
       snowWrap.appendChild(flake);
     }
 
-    const lines = [
-      "A special birthday surprise ✨",
-      "Soft vibes, pretty moments 💖",
-      "Made with warm wishes 🌸"
-    ];
+    const scenes = document.querySelectorAll(".scene");
+    const dots = document.querySelectorAll(".dot");
+    let current = 0;
 
-    const typedText = document.getElementById("typedText");
-    let lineIndex = 0;
-    let charIndex = 0;
-    let deleting = false;
-
-    function typeEffect() {
-      const current = lines[lineIndex];
-
-      if (!deleting) {
-        typedText.textContent = current.slice(0, charIndex + 1);
-        charIndex++;
-        if (charIndex === current.length) {
-          deleting = true;
-          setTimeout(typeEffect, 1000);
-          return;
-        }
-      } else {
-        typedText.textContent = current.slice(0, charIndex - 1);
-        charIndex--;
-        if (charIndex === 0) {
-          deleting = false;
-          lineIndex = (lineIndex + 1) % lines.length;
-        }
-      }
-
-      setTimeout(typeEffect, deleting ? 38 : 68);
-    }
-    typeEffect();
-
-    const shell = document.getElementById("pageShell");
-    const yesBtn1 = document.getElementById("yesBtn1");
-    const noBtn1 = document.getElementById("noBtn1");
-    const answerArea1 = document.getElementById("answerArea1");
-    const feedback1 = document.getElementById("feedback1");
-
-    let noCount1 = 0;
-    const noTexts1 = ["No", "Really?", "Still no?", "Pakka?", "Sure?", "No again?"];
-
-    function goToPage(url) {
-      shell.classList.add("page-out");
-      setTimeout(() => {
-        window.location.href = url;
-      }, 380);
+    function showScene(index) {
+      scenes.forEach((scene, i) => scene.classList.toggle("active", i === index));
+      dots.forEach((dot, i) => dot.classList.toggle("active", i === index));
+      current = index;
     }
 
-    yesBtn1.addEventListener("click", () => {
-      feedback1.textContent = "Opening memories... ✨";
-      goToPage("gallery.html");
-    });
-
-    noBtn1.addEventListener("click", () => {
-      noCount1++;
-      noBtn1.textContent = noTexts1[Math.min(noCount1, noTexts1.length - 1)];
-
-      const areaWidth = answerArea1.clientWidth;
-      const areaHeight = answerArea1.clientHeight;
-
-      const width = Math.max(58, 88 - noCount1 * 5);
-      const font = Math.max(0.72, 1 - noCount1 * 0.05);
-
-      noBtn1.style.width = width + "px";
-      noBtn1.style.fontSize = font + "rem";
-
-      const maxX = Math.max(12, areaWidth - width - 10);
-      const minY = 8;
-      const maxY = Math.max(16, areaHeight - 34);
-
-      const x = Math.floor(Math.random() * maxX);
-      const y = Math.floor(Math.random() * (maxY - minY + 1)) + minY;
-
-      noBtn1.style.left = x + "px";
-      noBtn1.style.top = y + "px";
-      noBtn1.style.transform = "none";
-
-      feedback1.textContent = "Hmm... jawab interesting ho raha hai 😏";
-    });
+    setInterval(() => {
+      let next = current + 1;
+      if (next >= scenes.length) next = 0;
+      showScene(next);
+    }, 3200);
   </script>
 </body>
 </html>
