@@ -140,4 +140,45 @@
 
     setInterval(nextSlide, 2800);
 
-    const yesBtn2 = document
+    const yesBtn2 = document.getElementById("yesBtn2");
+    const noBtn2 = document.getElementById("noBtn2");
+    const answerArea2 = document.getElementById("answerArea2");
+    const feedback2 = document.getElementById("feedback2");
+
+    let noCount2 = 0;
+    const noTexts2 = ["No", "Again?", "Still no?", "Why no?", "Sure?", "No again?"];
+
+    yesBtn2.addEventListener("click", () => {
+      feedback2.textContent = "Opening final message... 💐";
+      goToPage("message.html");
+    });
+
+    noBtn2.addEventListener("click", () => {
+      noCount2++;
+      noBtn2.textContent = noTexts2[Math.min(noCount2, noTexts2.length - 1)];
+
+      const areaWidth = answerArea2.clientWidth;
+      const areaHeight = answerArea2.clientHeight;
+
+      const width = Math.max(58, 88 - noCount2 * 5);
+      const font = Math.max(0.72, 1 - noCount2 * 0.05);
+
+      noBtn2.style.width = width + "px";
+      noBtn2.style.fontSize = font + "rem";
+
+      const maxX = Math.max(12, areaWidth - width - 10);
+      const minY = 8;
+      const maxY = Math.max(16, areaHeight - 34);
+
+      const x = Math.floor(Math.random() * maxX);
+      const y = Math.floor(Math.random() * (maxY - minY + 1)) + minY;
+
+      noBtn2.style.left = x + "px";
+      noBtn2.style.top = y + "px";
+      noBtn2.style.transform = "none";
+
+      feedback2.textContent = "No button bhi confuse ho raha hai 😏";
+    });
+  </script>
+</body>
+</html>
