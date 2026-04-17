@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Happy Birthday Amara Shaha</title>
+  <title>Happy Birthday Amara Shah</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -12,91 +12,71 @@
   </audio>
 
   <div class="bg-gradient"></div>
-  <div class="stars"></div>
-  <div class="snow-wrap" id="snowWrap"></div>
+  <div class="hearts-wrap" id="heartsWrap"></div>
 
-  <div class="balloons">
-    <span class="balloon b1"></span>
-    <span class="balloon b2"></span>
-    <span class="balloon b3"></span>
-    <span class="balloon b4"></span>
-    <span class="balloon b5"></span>
-    <span class="balloon b6"></span>
-    <span class="balloon b7"></span>
-    <span class="balloon b8"></span>
-  </div>
-
-  <main class="page">
-    <section class="hero-card">
+  <main class="page page-intro" id="pageShell">
+    <section class="hero-block">
       <p class="tiny-kicker">A Special Birthday Website</p>
 
       <h1 class="main-title">
         Happy Birthday
-        <span>Amara Shaha</span>
+        <span>Amara Shah</span>
         🎉
       </h1>
 
-      <p class="subtitle">
+      <p class="main-subtitle">
         A soft little surprise, made specially for you.
       </p>
 
-      <div class="stage" id="stage">
-        <div class="glow-orb orb-left"></div>
-        <div class="glow-orb orb-right"></div>
-
+      <div class="scene-stage">
         <div class="scene active" data-scene="0">
           <div class="scene-text">
             <p class="scene-top">Shall we begin? ✨</p>
             <h2 class="scene-heading">A small surprise is waiting for you</h2>
             <p class="scene-sub">Close your eyes and make a sweet wish 💖</p>
           </div>
-          <div class="sticker-float">🐼</div>
+          <div class="scene-sticker">🐼</div>
         </div>
 
         <div class="scene" data-scene="1">
           <div class="scene-text">
             <p class="scene-top">Guess what? 🎁</p>
-            <h2 class="scene-heading">Smiles, warmth, and little moments await you</h2>
-            <p class="scene-sub">Today is all about soft vibes and beautiful feelings 🌸</p>
+            <h2 class="scene-heading">Smiles, warmth, and beautiful moments await you</h2>
+            <p class="scene-sub">Today is meant to feel special, soft, and memorable 🌸</p>
           </div>
-          <div class="sticker-float">🐰</div>
+          <div class="scene-sticker">🐰</div>
         </div>
 
         <div class="scene" data-scene="2">
           <div class="scene-text">
-            <p class="scene-top">For Amara 💐</p>
-            <h2 class="scene-heading">May your day feel light, lovely, and special</h2>
-            <p class="scene-sub">A birthday deserves beautiful moments and peaceful smiles ✨</p>
+            <p class="scene-top">Hey Amara Shah 💐</p>
+            <h2 class="scene-heading">Today is your magical day</h2>
+            <p class="scene-sub">A pretty little birthday experience is opening just for you ✨</p>
           </div>
-          <div class="sticker-float">🎀</div>
-        </div>
-
-        <div class="scene" data-scene="3">
-          <div class="scene-text">
-            <p class="scene-top">A gentle prayer 🤍</p>
-            <h2 class="scene-heading">May Allah fill your life with peace, health, and barakah</h2>
-            <p class="scene-sub">And may every next day bring khair for you</p>
-          </div>
-          <div class="sticker-float">🌙</div>
-        </div>
-
-        <div class="scene" data-scene="4">
-          <div class="scene-text">
-            <p class="scene-top">Belated, but from the heart 💗</p>
-            <h2 class="scene-heading">Happy Birthday Amara Shaha</h2>
-            <p class="scene-sub">— From NX</p>
-          </div>
-          <div class="sticker-float">🎂</div>
+          <div class="scene-sticker">🎀</div>
         </div>
       </div>
 
-      <div class="dots" id="dots">
+      <div class="dots-row" id="introDots">
         <span class="dot active"></span>
         <span class="dot"></span>
         <span class="dot"></span>
-        <span class="dot"></span>
-        <span class="dot"></span>
       </div>
+
+      <div class="hero-image-stage">
+        <img src="birthday-banner.png" alt="Birthday Banner" class="hero-image" />
+      </div>
+
+      <p class="question-line">
+        Do you want to switch page? 💗
+      </p>
+
+      <div class="answer-line" id="answerArea1">
+        <span class="answer yes-answer" id="yesBtn1">Yes</span>
+        <span class="answer no-answer" id="noBtn1">No</span>
+      </div>
+
+      <p class="feedback-line" id="feedback1">Be honest... but not too honest 😌</p>
     </section>
   </main>
 
@@ -119,33 +99,82 @@
     }
     tryStartMusic();
 
-    const snowWrap = document.getElementById("snowWrap");
-    for (let i = 0; i < 40; i++) {
-      const flake = document.createElement("span");
-      flake.className = "snowflake";
-      flake.style.left = Math.random() * 100 + "%";
-      flake.style.animationDuration = (8 + Math.random() * 10) + "s";
-      flake.style.animationDelay = (Math.random() * 8) + "s";
-      flake.style.opacity = 0.18 + Math.random() * 0.45;
-      flake.style.transform = `scale(${0.5 + Math.random() * 1.1})`;
-      snowWrap.appendChild(flake);
+    const heartsWrap = document.getElementById("heartsWrap");
+    const heartSymbols = ["❤","💖","💕","💗","💞"];
+    for (let i = 0; i < 28; i++) {
+      const heart = document.createElement("span");
+      heart.className = "floating-heart";
+      heart.textContent = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+      heart.style.left = Math.random() * 100 + "%";
+      heart.style.animationDuration = (8 + Math.random() * 8) + "s";
+      heart.style.animationDelay = (Math.random() * 6) + "s";
+      heart.style.fontSize = (12 + Math.random() * 18) + "px";
+      heart.style.opacity = 0.15 + Math.random() * 0.45;
+      heartsWrap.appendChild(heart);
     }
 
     const scenes = document.querySelectorAll(".scene");
-    const dots = document.querySelectorAll(".dot");
-    let current = 0;
+    const introDots = document.querySelectorAll("#introDots .dot");
+    let currentScene = 0;
 
     function showScene(index) {
       scenes.forEach((scene, i) => scene.classList.toggle("active", i === index));
-      dots.forEach((dot, i) => dot.classList.toggle("active", i === index));
-      current = index;
+      introDots.forEach((dot, i) => dot.classList.toggle("active", i === index));
+      currentScene = index;
     }
 
     setInterval(() => {
-      let next = current + 1;
+      let next = currentScene + 1;
       if (next >= scenes.length) next = 0;
       showScene(next);
-    }, 3200);
+    }, 3600);
+
+    const shell = document.getElementById("pageShell");
+    const yesBtn1 = document.getElementById("yesBtn1");
+    const noBtn1 = document.getElementById("noBtn1");
+    const answerArea1 = document.getElementById("answerArea1");
+    const feedback1 = document.getElementById("feedback1");
+
+    function goToPage(url) {
+      shell.classList.add("page-out");
+      setTimeout(() => {
+        window.location.href = url;
+      }, 420);
+    }
+
+    let noCount1 = 0;
+    const noTexts1 = ["No", "Really?", "Still no?", "Pakka?", "Sure?", "No again?"];
+
+    yesBtn1.addEventListener("click", () => {
+      feedback1.textContent = "Opening next page... ✨";
+      goToPage("gallery.html");
+    });
+
+    noBtn1.addEventListener("click", () => {
+      noCount1++;
+      noBtn1.textContent = noTexts1[Math.min(noCount1, noTexts1.length - 1)];
+
+      const areaWidth = answerArea1.clientWidth;
+      const areaHeight = answerArea1.clientHeight;
+
+      const width = Math.max(56, 88 - noCount1 * 5);
+      const font = Math.max(0.70, 1 - noCount1 * 0.05);
+
+      noBtn1.style.width = width + "px";
+      noBtn1.style.fontSize = font + "rem";
+
+      const maxX = Math.max(12, areaWidth - width - 10);
+      const maxY = Math.max(12, areaHeight - 26);
+
+      const x = Math.floor(Math.random() * maxX);
+      const y = Math.floor(Math.random() * maxY);
+
+      noBtn1.style.left = x + "px";
+      noBtn1.style.top = y + "px";
+      noBtn1.style.transform = "none";
+
+      feedback1.textContent = "Hmm... lagta hai jawab interesting hai 😏";
+    });
   </script>
 </body>
 </html>
