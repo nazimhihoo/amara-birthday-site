@@ -2,8 +2,108 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta http-equiv="refresh" content="0; url=index.html">
-  <title>Redirecting...</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Final Message for Amara Shah</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
-<body></body>
+<body>
+  <audio id="birthdayMusic" loop preload="auto">
+    <source src="birthday-music.mp3" type="audio/mpeg" />
+  </audio>
+
+  <div class="bg-gradient"></div>
+  <div class="hearts-wrap" id="heartsWrap"></div>
+
+  <main class="page page-message">
+    <section class="hero-block final-block">
+      <p class="tiny-kicker">Final Message</p>
+
+      <h1 class="main-title smaller-title">
+        For <span>Amara Shah</span> 💐
+      </h1>
+
+      <div class="scene-stage short-stage message-stage">
+        <div class="scene active">
+          <div class="scene-text">
+            <p class="scene-top">Dear Amara Shah, 🤍</p>
+            <h2 class="scene-heading">Assalamualaikum.</h2>
+            <p class="scene-sub message-sub">
+              Belated happy birthday. Allah Ta’ala aap ki zindagi mein hamesha khushi, sukoon, sehat aur barkat ata farmae.
+            </p>
+            <p class="scene-sub message-sub">
+              Dua hai ke aap jahan bhi rahen, Allah aap ko apni rehmat, hifazat aur asaniyon mein rakhe. Aap ke liye har naya saal behtar ho, aur har agla din khair lekar aaye.
+            </p>
+            <p class="scene-sub final-sign">— From NX</p>
+          </div>
+          <div class="scene-sticker">🌙</div>
+        </div>
+      </div>
+
+      <div class="music-row">
+        <button class="music-btn" id="musicBtn">Pause Music</button>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const music = document.getElementById("birthdayMusic");
+    const musicBtn = document.getElementById("musicBtn");
+    music.volume = 0.5;
+
+    let playing = false;
+
+    async function tryStartMusic() {
+      try {
+        await music.play();
+        playing = true;
+        musicBtn.textContent = "Pause Music";
+      } catch (e) {
+        playing = false;
+        musicBtn.textContent = "Play Music";
+        const startOnFirstTouch = async () => {
+          try {
+            await music.play();
+            playing = true;
+            musicBtn.textContent = "Pause Music";
+          } catch (_) {}
+          document.removeEventListener("click", startOnFirstTouch);
+          document.removeEventListener("touchstart", startOnFirstTouch);
+        };
+        document.addEventListener("click", startOnFirstTouch, { once: true });
+        document.addEventListener("touchstart", startOnFirstTouch, { once: true });
+      }
+    }
+    tryStartMusic();
+
+    const heartsWrap = document.getElementById("heartsWrap");
+    const heartSymbols = ["❤","💖","💕","💗","💞"];
+    for (let i = 0; i < 28; i++) {
+      const heart = document.createElement("span");
+      heart.className = "floating-heart";
+      heart.textContent = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+      heart.style.left = Math.random() * 100 + "%";
+      heart.style.animationDuration = (8 + Math.random() * 8) + "s";
+      heart.style.animationDelay = (Math.random() * 6) + "s";
+      heart.style.fontSize = (12 + Math.random() * 18) + "px";
+      heart.style.opacity = 0.15 + Math.random() * 0.45;
+      heartsWrap.appendChild(heart);
+    }
+
+    musicBtn.addEventListener("click", async () => {
+      try {
+        if (playing) {
+          music.pause();
+          playing = false;
+          musicBtn.textContent = "Play Music";
+        } else {
+          await music.play();
+          playing = true;
+          musicBtn.textContent = "Pause Music";
+        }
+      } catch (e) {
+        alert("birthday-music.mp3 file check karo.");
+      }
+    });
+  </script>
+</body>
 </html>
