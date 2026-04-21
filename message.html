@@ -3,8 +3,407 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Final Message for Amara Shah</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>A Beautiful Surprise for Kashif Bhai</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg-1: #0c0d19;
+      --bg-2: #171228;
+      --bg-3: #2a163d;
+      --glass: rgba(255, 255, 255, 0.08);
+      --glass-border: rgba(255, 255, 255, 0.14);
+      --text: #ffffff;
+      --muted: rgba(255, 255, 255, 0.76);
+      --soft: rgba(255, 255, 255, 0.55);
+      --accent: #ffbfdc;
+      --accent-2: #ffd86e;
+      --accent-3: #efc8ff;
+      --shadow: 0 20px 70px rgba(0, 0, 0, 0.38);
+    }
+
+    body {
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      color: var(--text);
+      min-height: 100vh;
+      overflow: hidden;
+      position: relative;
+      background:
+        linear-gradient(135deg, var(--bg-1), var(--bg-2), var(--bg-3));
+    }
+
+    .bg-gradient {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 15% 18%, rgba(255, 191, 220, 0.16), transparent 26%),
+        radial-gradient(circle at 86% 24%, rgba(255, 216, 110, 0.10), transparent 22%),
+        radial-gradient(circle at 54% 76%, rgba(239, 200, 255, 0.11), transparent 28%);
+    }
+
+    .hearts-wrap {
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .floating-heart {
+      position: absolute;
+      bottom: -40px;
+      animation: floatHeart linear infinite;
+      filter: blur(0.2px);
+    }
+
+    @keyframes floatHeart {
+      0% {
+        transform: translateY(0) translateX(0) scale(0.9);
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-115vh) translateX(22px) scale(1.15);
+        opacity: 0;
+      }
+    }
+
+    .page {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      position: relative;
+      z-index: 2;
+      transition: opacity 0.45s ease, transform 0.45s ease;
+    }
+
+    .page.page-out {
+      opacity: 0;
+      transform: scale(0.97) translateY(10px);
+    }
+
+    .hero-block {
+      width: 100%;
+      max-width: 980px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04));
+      border: 1px solid var(--glass-border);
+      border-radius: 32px;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: var(--shadow);
+      padding: 34px 28px 30px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-block::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.05), transparent 35%, rgba(255,255,255,0.03));
+      pointer-events: none;
+    }
+
+    .glow-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      margin-bottom: 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.10);
+      color: #fff9de;
+      font-size: 0.86rem;
+      font-weight: 600;
+      box-shadow: 0 0 25px rgba(255, 216, 110, 0.08);
+    }
+
+    .tiny-kicker {
+      font-size: 0.80rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--accent-2);
+      margin-bottom: 12px;
+    }
+
+    .main-title {
+      font-size: clamp(2.1rem, 5vw, 4rem);
+      line-height: 1.06;
+      font-weight: 800;
+      margin-bottom: 14px;
+      letter-spacing: -0.02em;
+    }
+
+    .main-title span {
+      display: inline-block;
+      color: var(--accent);
+      text-shadow: 0 0 20px rgba(255, 191, 220, 0.30);
+    }
+
+    .main-subtitle {
+      max-width: 740px;
+      margin: 0 auto 28px;
+      color: var(--muted);
+      line-height: 1.8;
+      font-size: 1rem;
+    }
+
+    .scene-stage {
+      position: relative;
+      min-height: 290px;
+      margin: 0 auto 20px;
+      border-radius: 26px;
+      overflow: hidden;
+    }
+
+    .scene {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 28px;
+      border-radius: 26px;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03)),
+        rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      opacity: 0;
+      transform: translateY(16px) scale(0.985);
+      pointer-events: none;
+      transition: all 0.55s ease;
+    }
+
+    .scene.active {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      pointer-events: auto;
+    }
+
+    .scene-text {
+      flex: 1;
+      text-align: left;
+    }
+
+    .scene-top {
+      font-size: 0.83rem;
+      color: var(--accent-2);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .scene-heading {
+      font-size: clamp(1.35rem, 3vw, 2rem);
+      line-height: 1.3;
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+
+    .scene-sub {
+      max-width: 550px;
+      color: var(--muted);
+      line-height: 1.75;
+      font-size: 0.98rem;
+    }
+
+    .scene-sticker {
+      min-width: 116px;
+      height: 116px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      border-radius: 28px;
+      background: rgba(255,255,255,0.08);
+      box-shadow:
+        inset 0 0 0 1px rgba(255,255,255,0.08),
+        0 12px 25px rgba(0,0,0,0.12);
+    }
+
+    .dots-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 22px;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.22);
+      transition: all 0.3s ease;
+    }
+
+    .dot.active {
+      width: 30px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      box-shadow: 0 0 18px rgba(255, 216, 110, 0.18);
+    }
+
+    .hero-image-stage {
+      margin: 0 auto 24px;
+      width: 100%;
+      max-width: 780px;
+      border-radius: 26px;
+      overflow: hidden;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: 0 18px 45px rgba(0,0,0,0.22);
+      position: relative;
+    }
+
+    .hero-image-stage::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(12,13,25,0.10), rgba(255,255,255,0.02));
+      pointer-events: none;
+    }
+
+    .hero-image {
+      display: block;
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+    }
+
+    .question-line {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-top: 6px;
+      margin-bottom: 18px;
+      color: #fff9fd;
+    }
+
+    .answer-line {
+      width: 100%;
+      max-width: 370px;
+      min-height: 82px;
+      margin: 0 auto;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+    }
+
+    .answer {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 116px;
+      height: 50px;
+      padding: 0 20px;
+      border-radius: 999px;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.25s ease;
+      font-weight: 700;
+      font-size: 0.98rem;
+      letter-spacing: 0.02em;
+    }
+
+    .yes-answer {
+      background: linear-gradient(135deg, #ffbfdc, #ffd86e);
+      color: #1b1221;
+      box-shadow: 0 10px 28px rgba(255, 191, 220, 0.28);
+    }
+
+    .yes-answer:hover {
+      transform: translateY(-2px) scale(1.02);
+    }
+
+    .no-answer {
+      position: absolute;
+      background: rgba(255,255,255,0.08);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.12);
+      left: 57%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 92px;
+      backdrop-filter: blur(10px);
+    }
+
+    .feedback-line {
+      margin-top: 20px;
+      color: var(--soft);
+      font-size: 0.95rem;
+      min-height: 24px;
+    }
+
+    @media (max-width: 768px) {
+      body {
+        overflow-y: auto;
+      }
+
+      .page {
+        padding: 16px;
+      }
+
+      .hero-block {
+        padding: 24px 18px 22px;
+        border-radius: 24px;
+      }
+
+      .scene-stage {
+        min-height: 360px;
+      }
+
+      .scene {
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        padding: 22px 18px;
+      }
+
+      .scene-text {
+        text-align: center;
+      }
+
+      .scene-sub {
+        margin: 0 auto;
+      }
+
+      .scene-sticker {
+        min-width: 92px;
+        height: 92px;
+        font-size: 2.4rem;
+        border-radius: 22px;
+      }
+
+      .hero-image-stage {
+        border-radius: 22px;
+      }
+
+      .answer-line {
+        max-width: 300px;
+      }
+
+      .answer {
+        min-width: 98px;
+        height: 46px;
+      }
+    }
+  </style>
 </head>
 <body>
   <audio id="birthdayMusic" loop preload="auto">
@@ -14,58 +413,94 @@
   <div class="bg-gradient"></div>
   <div class="hearts-wrap" id="heartsWrap"></div>
 
-  <main class="page page-message">
-    <section class="hero-block final-block">
-      <p class="tiny-kicker">Final Message</p>
+  <main class="page page-intro" id="pageShell">
+    <section class="hero-block">
+      <div class="glow-badge">✨ Made specially with love and respect</div>
 
-      <h1 class="main-title smaller-title">
-        For <span>Amara Shah</span> 💐
+      <p class="tiny-kicker">A Special Website Surprise</p>
+
+      <h1 class="main-title">
+        A Beautiful Surprise for
+        <span>Kashif Bhai</span>
+        ✨
       </h1>
 
-      <div class="scene-stage short-stage message-stage">
-        <div class="scene active">
+      <p class="main-subtitle">
+        From Amara Shah — thoughtfully made to create a soft, memorable,
+        and heartfelt moment just for you. Not every surprise needs many words;
+        some simply feel special the moment they appear.
+      </p>
+
+      <div class="scene-stage">
+        <div class="scene active" data-scene="0">
           <div class="scene-text">
-            <p class="scene-top">Dear Amara Shah, 🤍</p>
-            <h2 class="scene-heading">Assalamualaikum.</h2>
-            <p class="scene-sub message-sub">
-              Belated happy birthday. Allah Ta’ala aap ki zindagi mein hamesha khushi, sukoon, sehat aur barkat ata farmae.
+            <p class="scene-top">The beginning</p>
+            <h2 class="scene-heading">A thoughtful little surprise is waiting for you</h2>
+            <p class="scene-sub">
+              Some gestures may look simple, but the feeling behind them makes them unforgettable.
             </p>
-            <p class="scene-sub message-sub">
-              Dua hai ke aap jahan bhi rahen, Allah aap ko apni rehmat, hifazat aur asaniyon mein rakhe. Aap ke liye har naya saal behtar ho, aur har agla din khair lekar aaye.
-            </p>
-            <p class="scene-sub final-sign">— From NX</p>
           </div>
-          <div class="scene-sticker">🌙</div>
+          <div class="scene-sticker">✨</div>
+        </div>
+
+        <div class="scene" data-scene="1">
+          <div class="scene-text">
+            <p class="scene-top">A warm feeling</p>
+            <h2 class="scene-heading">Respect, sincerity, and beautiful wishes always leave a lasting impression</h2>
+            <p class="scene-sub">
+              This page was designed to feel calm, elegant, and meaningful from the very first look.
+            </p>
+          </div>
+          <div class="scene-sticker">💖</div>
+        </div>
+
+        <div class="scene" data-scene="2">
+          <div class="scene-text">
+            <p class="scene-top">Specially for Kashif Bhai</p>
+            <h2 class="scene-heading">A beautiful experience is ready to open just for you</h2>
+            <p class="scene-sub">
+              One click from here, and the next sweet part of this surprise begins.
+            </p>
+          </div>
+          <div class="scene-sticker">🎁</div>
         </div>
       </div>
 
-      <div class="music-row">
-        <button class="music-btn" id="musicBtn">Pause Music</button>
+      <div class="dots-row" id="introDots">
+        <span class="dot active"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
       </div>
+
+      <div class="hero-image-stage">
+        <img src="birthday-banner.png" alt="Special Banner for Kashif Bhai" class="hero-image" />
+      </div>
+
+      <p class="question-line">
+        Ready to open the next beautiful page? 💫
+      </p>
+
+      <div class="answer-line" id="answerArea1">
+        <span class="answer yes-answer" id="yesBtn1">Yes, open it</span>
+        <span class="answer no-answer" id="noBtn1">No</span>
+      </div>
+
+      <p class="feedback-line" id="feedback1">
+        Be honest... but the sweetest answer is already obvious 😌
+      </p>
     </section>
   </main>
 
   <script>
     const music = document.getElementById("birthdayMusic");
-    const musicBtn = document.getElementById("musicBtn");
     music.volume = 0.5;
-
-    let playing = false;
 
     async function tryStartMusic() {
       try {
         await music.play();
-        playing = true;
-        musicBtn.textContent = "Pause Music";
       } catch (e) {
-        playing = false;
-        musicBtn.textContent = "Play Music";
         const startOnFirstTouch = async () => {
-          try {
-            await music.play();
-            playing = true;
-            musicBtn.textContent = "Pause Music";
-          } catch (_) {}
+          try { await music.play(); } catch (_) {}
           document.removeEventListener("click", startOnFirstTouch);
           document.removeEventListener("touchstart", startOnFirstTouch);
         };
@@ -76,8 +511,8 @@
     tryStartMusic();
 
     const heartsWrap = document.getElementById("heartsWrap");
-    const heartSymbols = ["❤","💖","💕","💗","💞"];
-    for (let i = 0; i < 28; i++) {
+    const heartSymbols = ["❤","💖","💕","💗","💞","✨"];
+    for (let i = 0; i < 30; i++) {
       const heart = document.createElement("span");
       heart.className = "floating-heart";
       heart.textContent = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
@@ -85,25 +520,72 @@
       heart.style.animationDuration = (8 + Math.random() * 8) + "s";
       heart.style.animationDelay = (Math.random() * 6) + "s";
       heart.style.fontSize = (12 + Math.random() * 18) + "px";
-      heart.style.opacity = 0.15 + Math.random() * 0.45;
+      heart.style.opacity = 0.15 + Math.random() * 0.4;
       heartsWrap.appendChild(heart);
     }
 
-    musicBtn.addEventListener("click", async () => {
-      try {
-        if (playing) {
-          music.pause();
-          playing = false;
-          musicBtn.textContent = "Play Music";
-        } else {
-          await music.play();
-          playing = true;
-          musicBtn.textContent = "Pause Music";
-        }
-      } catch (e) {
-        alert("birthday-music.mp3 file check karo.");
-      }
+    const scenes = document.querySelectorAll(".scene");
+    const introDots = document.querySelectorAll("#introDots .dot");
+    let currentScene = 0;
+
+    function showScene(index) {
+      scenes.forEach((scene, i) => scene.classList.toggle("active", i === index));
+      introDots.forEach((dot, i) => dot.classList.toggle("active", i === index));
+      currentScene = index;
+    }
+
+    setInterval(() => {
+      let next = currentScene + 1;
+      if (next >= scenes.length) next = 0;
+      showScene(next);
+    }, 3600);
+
+    const shell = document.getElementById("pageShell");
+    const yesBtn1 = document.getElementById("yesBtn1");
+    const noBtn1 = document.getElementById("noBtn1");
+    const answerArea1 = document.getElementById("answerArea1");
+    const feedback1 = document.getElementById("feedback1");
+
+    function goToPage(url) {
+      shell.classList.add("page-out");
+      setTimeout(() => {
+        window.location.href = url;
+      }, 420);
+    }
+
+    let noCount1 = 0;
+    const noTexts1 = ["No", "Really?", "Still no?", "Pakka?", "Soch lo", "Again no?"];
+
+    yesBtn1.addEventListener("click", () => {
+      feedback1.textContent = "Opening the next beautiful page... ✨";
+      goToPage("gallery.html");
+    });
+
+    noBtn1.addEventListener("click", () => {
+      noCount1++;
+      noBtn1.textContent = noTexts1[Math.min(noCount1, noTexts1.length - 1)];
+
+      const areaWidth = answerArea1.clientWidth;
+      const areaHeight = answerArea1.clientHeight;
+
+      const width = Math.max(56, 88 - noCount1 * 5);
+      const font = Math.max(0.70, 1 - noCount1 * 0.05);
+
+      noBtn1.style.width = width + "px";
+      noBtn1.style.fontSize = font + "rem";
+
+      const maxX = Math.max(12, areaWidth - width - 10);
+      const maxY = Math.max(12, areaHeight - 26);
+
+      const x = Math.floor(Math.random() * maxX);
+      const y = Math.floor(Math.random() * maxY);
+
+      noBtn1.style.left = x + "px";
+      noBtn1.style.top = y + "px";
+      noBtn1.style.transform = "none";
+
+      feedback1.textContent = "Lagta hai dil se answer yes hi hai 😏";
     });
   </script>
 </body>
-</html>
+  </html>
